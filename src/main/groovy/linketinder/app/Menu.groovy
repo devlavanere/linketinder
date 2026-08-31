@@ -2,12 +2,12 @@ package linketinder.app
 
 import linketinder.model.Candidato
 import linketinder.model.Empresa
+import java.util.InputMismatchException
 import java.util.Scanner
 
 class Menu {
-    // Referencia das listas para poder imprimi-las
-    List<Candidato> candidatos
-    List<Empresa> empresas
+    // Modificação realizada para adequação dos testes com spock
+    GerenciadorDePerfis gerenciador
 
     // Método principal
     void iniciar() {
@@ -31,12 +31,12 @@ class Menu {
 
                 switch (opcao) {
                     case 1:
-                        println "\n=== EMPRESAS CADASTRADA (${empresas.size()}) ==="
-                        empresas.each {it.exibirPerfil()}
+                        println "\n=== EMPRESAS CADASTRADAS (${gerenciador.empresas.size()}) ==="
+                        gerenciador.empresas.each {it.exibirPerfil()}
                         break
                     case 2:
-                        println "\n=== EMPRESAS CADASTRADAS (${candidatos.size()}) ==="
-                        candidatos.each {it.exibirPerfil()}
+                        println "\n=== CANDIDATOS CADASTRADOS (${gerenciador.candidatos.size()}) ==="
+                        gerenciador.candidatos.each {it.exibirPerfil()}
                         break
                     case 3:
                         executarWizardCandidato(scanner)
@@ -56,72 +56,74 @@ class Menu {
             }
         }
     }
-        private void executarWizardCandidato(Scanner scanner) {
-            println "\n--- WIZARD DE CADASTRO DE CANDIDATO ---"
-            Candidato novo = new Candidato()
 
-            print "Nome: "
-            novo.nome = scanner.nextLine()
+    private void executarWizardCandidato(Scanner scanner) {
+        println "\n--- WIZARD DE CADASTRO DE CANDIDATO ---"
+        Candidato novo = new Candidato()
 
-            print "E-mail: "
-            novo.email = scanner.nextLine()
+        print "Nome: "
+        novo.nome = scanner.nextLine()
 
-            print "CPF: "
-            novo.cpf = scanner.nextLine()
+        print "E-mail: "
+        novo.email = scanner.nextLine()
 
-            print "Idade: "
-            novo.idade = scanner.nextInt()
-            scanner.nextLine() // Consumir o Enter
+        print "CPF: "
+        novo.cpf = scanner.nextLine()
 
-            print "Estado (UF): "
-            novo.estado = scanner.nextLine()
+        print "Idade: "
+        novo.idade = scanner.nextInt()
+        scanner.nextLine() // Consumir o Enter
 
-            print "CEP: "
-            novo.cep = scanner.nextLine()
+        print "Estado (UF): "
+        novo.estado = scanner.nextLine()
 
-            print "Descrição pessoal: "
-            novo.descricao = scanner.nextLine()
+        print "CEP: "
+        novo.cep = scanner.nextLine()
 
-            print "Competências (separadas por vírgula): "
-            String compStr = scanner.nextLine()
-            // Pega a string digitada, divide pelas vírgulas e remove espaços extras
-            novo.competencias = compStr.split(',').collect { it.trim() }
+        print "Descrição pessoal: "
+        novo.descricao = scanner.nextLine()
 
-            candidatos << novo
-            println "=> Candidato(a) ${novo.nome} cadastrado(a) com sucesso!"
-        }
+        print "Competências (separadas por vírgula): "
+        String compStr = scanner.nextLine()
+        // Pega a string digitada, divide pelas vírgulas e remove espaços extras
+        novo.competencias = compStr.split(',').collect { it.trim() }
 
-        private void executarWizardEmpresa(Scanner scanner) {
-            println "\n--- WIZARD DE CADASTRO DE EMPRESA ---"
-            Empresa nova = new Empresa()
-
-            print "Nome da Empresa: "
-            nova.nome = scanner.nextLine()
-
-            print "E-mail Corporativo: "
-            nova.email = scanner.nextLine()
-
-            print "CNPJ: "
-            nova.cnpj = scanner.nextLine()
-
-            print "País: "
-            nova.pais = scanner.nextLine()
-
-            print "Estado (UF): "
-            nova.estado = scanner.nextLine()
-
-            print "CEP: "
-            nova.cep = scanner.nextLine()
-
-            print "Descrição da empresa: "
-            nova.descricao = scanner.nextLine()
-
-            print "Competências desejadas (separadas por vírgula): "
-            String compStr = scanner.nextLine()
-            nova.competencias = compStr.split(',').collect { it.trim() }
-
-            empresas << nova
-            println "=> Empresa ${nova.nome} cadastrada com sucesso!"
-        }
+        // Utilizando o gerenciador para inserir para testes
+        gerenciador.adicionarCandidato(novo)
+        println "=> Candidato(a) ${novo.nome} cadastrado(a) com sucesso!"
     }
 
+    private void executarWizardEmpresa(Scanner scanner) {
+        println "\n--- WIZARD DE CADASTRO DE EMPRESA ---"
+        Empresa nova = new Empresa()
+
+        print "Nome da Empresa: "
+        nova.nome = scanner.nextLine()
+
+        print "E-mail Corporativo: "
+        nova.email = scanner.nextLine()
+
+        print "CNPJ: "
+        nova.cnpj = scanner.nextLine()
+
+        print "País: "
+        nova.pais = scanner.nextLine()
+
+        print "Estado (UF): "
+        nova.estado = scanner.nextLine()
+
+        print "CEP: "
+        nova.cep = scanner.nextLine()
+
+        print "Descrição da empresa: "
+        nova.descricao = scanner.nextLine()
+
+        print "Competências desejadas (separadas por vírgula): "
+        String compStr = scanner.nextLine()
+        nova.competencias = compStr.split(',').collect { it.trim() }
+
+        // Utilizando o gerenciador para inserir respeitando a arquitetura para testes
+        gerenciador.adicionarEmpresa(nova)
+        println "=> Empresa ${nova.nome} cadastrada com sucesso!"
+    }
+}

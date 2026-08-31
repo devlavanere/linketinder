@@ -9,8 +9,9 @@ Um sistema de recrutamento que une o modelo do LinkedIn com o formato de "Match"
 
 O sistema foi projetado utilizando os pilares de Orientação a Objetos (Herança e Abstração) e estruturado com foco no Princípio da Responsabilidade Única (SRP) para separar a camada de dados da camada de interação.
 
-*   **Banco de Dados em Memória:** Uso de Collections (Listas) para armazenamento rápido dos perfis durante a execução.
-*   **Separação de Domínio:** Distinção estrutural entre Pessoa Física (Candidato) e Jurídica (Empresa), herdando atributos comuns de uma base abstrata.
+*   **Arquitetura em Camadas:** O sistema é dividido entre Modelos (`Pessoa`, `Candidato`, `Empresa`), Regras de Negócio/Gerenciamento de Dados (`GerenciadorDePerfis`) e Apresentação (`Menu`).
+*   **Testes Unitários (TDD):** Desenvolvimento guiado por testes utilizando o Spock Framework, garantindo a integridade e validação da inserção de novos elementos (Candidatos e Empresas) no sistema.
+*   **Banco de Dados em Memória:** Uso de Collections (Listas) para armazenamento rápido dos perfis durante a execução, manipuladas de forma isolada e segura pelo gerenciador.
 *   **Wizard Interativo:** Fluxo de cadastro guiado passo a passo diretamente no terminal, com tratamento robusto de exceções para prevenir falhas de entrada de dados.
 *   **Mock de Dados:** Inicialização do sistema com 5 candidatos e 5 empresas pré-cadastradas para validação imediata do MVP.
 
@@ -18,9 +19,10 @@ O sistema foi projetado utilizando os pilares de Orientação a Objetos (Heranç
 
 *   **Groovy:** 4.0.22
 *   **Java (JDK):** 8 (Zulu / Azul Systems)
+*   **Testes:** Spock Framework (2.3) e JUnit Platform
 *   **Build Tool:** Gradle
 
-## Como Executar
+## Como Executar a Aplicação
 
 **Opção 1: Via IDE (IntelliJ IDEA)**
 1. Clone este repositório.
@@ -31,4 +33,5 @@ O sistema foi projetado utilizando os pilares de Orientação a Objetos (Heranç
 
 **Opção 2: Via Terminal**
 Na raiz do diretório do projeto, execute o comando abaixo utilizando o Gradle Wrapper:
-`./gradlew run`
+```bash
+./gradlew run
