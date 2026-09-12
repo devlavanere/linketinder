@@ -1,8 +1,33 @@
 import type { ICandidato } from '../models';
 
-export class LocalStorage {
+export class StorageService{
     // Chave para salvar no navegador
     private readonly CANDIDATOS_KEY = 'linketinder_candidatos';
 
+    // A: Método que lê os candidatos salvos
+    getCandidatos(): ICandidato[] {
+        // Busca texto no banco
+        const data = localStorage.getItem(this.CANDIDATOS_KEY);
+
+        // Verificação para ver se tem algo no banco
+        if(data) {
+            return JSON.parse(data);
+        } else {
+            // caso vazio
+            return [];
+        }
+    }
+
+    // B: Método que adiciona uym novo candidato
+    adicionarCandidato(candidato: ICandidato): void {
+        // Chama o método this.getCandidatos() e guarda numa variável
+        const lista = this.getCandidatos();
+
+        // Adiciona no array
+        lista.push(candidato);
+
+        // Transforma o array em texto e guarda no local storage
+        localStorage.setItem(this.CANDIDATOS_KEY, JSON.stringify(lista));
+    }
 }
 
