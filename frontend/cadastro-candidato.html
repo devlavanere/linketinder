@@ -46,7 +46,7 @@
 <body>
   
   <div class="form-container">
-    <h2>Wizard: Novo Candidato</h2>
+    <h2>Novo Candidato</h2>
     
     <!-- O ID para pegar o envio dos dados -->
     <form id="formCandidato">
@@ -72,9 +72,24 @@
         <input type="number" id="idade" required>
       </div>
 
+      <div class="form-group">
+        <label for="estado">Estado (UF)</label>
+        <input type="text" id="estado" maxlength="2" placeholder="Ex: MA" required>
+      </div>
+
+      <div class="form-group">
+        <label for="cep">CEP</label>
+        <input type="text" id="cep" placeholder="Apenas números" required>
+      </div>
+
+      <div class="form-group">
+        <label for="descricao">Descrição / Resumo Profissional</label>
+        <textarea id="descricao" rows="3" required></textarea>
+      </div>
+
       <!-- Captura competências como texto e tratar no TS para serem usadas no gráfico. -->
       <div class="form-group">
-        <label for="competencias">Competências (separadas por vírgula)</label>
+        <label for="competencias">Competências</label>
         <input type="text" id="competencias" placeholder="Ex: Java, Spring, Vue" required>
       </div>
 
