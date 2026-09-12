@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Linketinder - Home</title>
+  <style>
+    .container { 
+      max-width: 600px; 
+      margin: 50px auto; 
+      background: white; 
+      padding: 30px; 
+      border-radius: 10px; 
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1); 
+      text-align: center; 
+    }
+    .btn { 
+      display: inline-block; 
+      padding: 10px 20px; 
+      margin: 10px; 
+      text-decoration: none; 
+      color: white; 
+      background: #007bff; 
+      border-radius: 5px; 
+      font-weight: bold; 
+    }
+    .btn:hover { 
+      background: #0056b3; 
+    }
+    .btn-empresa { 
+      background: #28a745; 
+    }
+    .btn-empresa:hover { 
+      background: #1e7e34; 
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Linketinder</h1>
+    <p>O match perfeito entre a sua carreira e as melhores empresas.</p>
+    
+    <div style="margin-top: 30px;">
+      <h3>Para Candidatos</h3>
+      <a href="/cadastro-candidato.html" class="btn">Cadastrar Candidato</a>
+      <a href="#" class="btn">Ver Vagas (Em breve)</a>
+    </div>
+
+    <hr style="margin: 30px 0; border: 1px solid #eee;">
+
+    <div>
+      <h3>Para Empresas</h3>
+      <a href="#" class="btn btn-empresa">Cadastrar Empresa (Em breve)</a>
+      <a href="#" class="btn btn-empresa">Acessar Dashboard (Em breve)</a>
+    </div>
+  </div>
+  
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html>
