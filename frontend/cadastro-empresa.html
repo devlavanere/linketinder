@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>Cadastro de Candidato</title>
+  <title>Cadastro de Empresa</title>
   <link rel="stylesheet" href="/src/style.css">
   <style>
     .form-container { 
@@ -18,8 +18,8 @@
     }
     label { 
         display: block; 
-        font-weight: 
-        bold; margin-bottom: 5px; 
+        font-weight: bold; 
+        margin-bottom: 5px; 
     }
     input, textarea { 
         width: 100%; 
@@ -28,78 +28,76 @@
         border-radius: 4px; 
         box-sizing: border-box; 
     }
+    
+    /* Botão verde para destacar que é área da empresa */
     .btn-submit { 
         width: 100%; 
         padding: 12px; 
-        background: #007bff; 
+        background: #28a745; 
         color: white; 
         border: none; 
-        border-radius: 4px; cursor: 
-        pointer; font-size: 16px; 
+        border-radius: 4px; 
+        cursor: pointer; 
+        font-size: 16px; 
         font-weight: bold; 
     }
     .btn-submit:hover { 
-        background: #0056b3; 
+        background: #1e7e34; 
     }
   </style>
 </head>
 <body>
   
   <div class="form-container">
-    <h2>Novo Candidato</h2>
+    <h2>Nova Empresa</h2>
     
-    <!-- O ID para pegar o envio dos dados -->
-    <form id="formCandidato">
-      
-      <!-- ID único para cada input para capturar o valor individualmente no TS -->
+    <form id="formEmpresa">
       <div class="form-group">
-        <label for="nome">Nome Completo</label>
+        <label for="nome">Nome da Empresa</label>
         <input type="text" id="nome" required>
       </div>
 
       <div class="form-group">
-        <label for="email">E-mail</label>
+        <label for="email">E-mail Corporativo</label>
         <input type="email" id="email" required>
       </div>
 
       <div class="form-group">
-        <label for="cpf">CPF</label>
-        <input type="text" id="cpf" required>
+        <label for="cnpj">CNPJ</label>
+        <input type="text" id="cnpj" required>
       </div>
 
       <div class="form-group">
-        <label for="idade">Idade</label>
-        <input type="number" id="idade" required>
+        <label for="pais">País</label>
+        <input type="text" id="pais" required>
       </div>
 
       <div class="form-group">
         <label for="estado">Estado (UF)</label>
-        <input type="text" id="estado" maxlength="2" placeholder="Ex: MA" required>
+        <input type="text" id="estado" maxlength="2" required>
       </div>
 
       <div class="form-group">
         <label for="cep">CEP</label>
-        <input type="text" id="cep" placeholder="Apenas números" required>
+        <input type="text" id="cep" required>
       </div>
 
       <div class="form-group">
-        <label for="descricao">Descrição / Resumo Profissional</label>
+        <label for="descricao">Descrição da Empresa</label>
         <textarea id="descricao" rows="3" required></textarea>
       </div>
 
-      <!-- Captura competências como texto e tratar no TS para serem usadas no gráfico. -->
       <div class="form-group">
-        <label for="competencias">Competências (separadas por vírgula)</label>
-        <input type="text" id="competencias" placeholder="Ex: Java, Spring, Vue" required>
+        <label for="competencias">Tecnologias utilizadas (separadas por vírgula)</label>
+        <input type="text" id="competencias" placeholder="Ex: Java, Python, Vue.js" required>
       </div>
 
-      <button type="submit" class="btn-submit">Salvar Candidato</button>
+      <button type="submit" class="btn-submit">Salvar Empresa</button>
     </form>
     
     <a href="/index.html" style="display: block; text-align: center; margin-top: 15px;">Voltar para Home</a>
   </div>
 
-  <!-- Importa o TypeScript diretamente no HTML como um módulo -->
-  <script type="module" src="/src/pages/cadastroCandidato.ts"></script>
+  <script type="module" src="/src/pages/cadastroEmpresa.ts"></script>
 </body>
 </html>

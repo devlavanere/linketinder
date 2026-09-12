@@ -12,3 +12,8 @@ export interface ICandidato extends IPessoa {
     cpf: string;
     idade: number;
 }
+
+export interface IEmpresa extends IPessoa {
+    cnpj: string;
+    pais: string;
+}

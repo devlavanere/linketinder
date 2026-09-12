@@ -1,8 +1,11 @@
-import type { ICandidato } from '../models';
+import type { ICandidato, IEmpresa } from '../models';
 
 export class StorageService{
     // Chave para salvar no navegador
     private readonly CANDIDATOS_KEY = 'linketinder_candidatos';
+    private readonly EMPRESAS_KEY = 'linketinder_empresas';
+
+    // Métodos Candidatos
 
     // A: Método que lê os candidatos salvos
     getCandidatos(): ICandidato[] {
@@ -39,6 +42,28 @@ export class StorageService{
 
         // Salva lista atualizada
         localStorage.setItem(this.CANDIDATOS_KEY, JSON.stringify(novaLista));
+    }
+
+    // Métodos Empresas
+
+    // Método que lê as empresas salvas
+    getEmpresas(): IEmpresa[] {
+        const data = localStorage.getItem(this.EMPRESAS_KEY);
+
+        if(data) {
+            return JSON.parse(data);
+        } else {
+            return [];
+        }
+    }
+
+    // Método que adiciona empresa
+    adicionarEmpresa(empresa: IEmpresa): void {
+        const lista = this.getEmpresas();
+
+        lista.push(empresa);
+
+        localStorage.setItem(this.EMPRESAS_KEY, JSON.stringify(lista));
     }
 }
 
