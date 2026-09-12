@@ -25,14 +25,18 @@ if (gridContainer) {
             
             // Desenhando a estrutura do card
             const cardHTML = `
-                <div class="card">
-                    <h3>${candidato.nome}</h3>
+                <div class="card" title="Mais informações: ${candidato.descricao}">
+                    <h3>Candidato: #${candidato.id.substring(0,4)}</h3>
                     <p><strong>Idade:</strong> ${candidato.idade} anos</p>
                     <p><strong>Estado:</strong> ${candidato.estado}</p>
                     <p><strong>Descrição:</strong> ${candidato.descricao}</p>
                     <div class="tags">
                         ${tagsHTML}
                     </div>
+                    <!-- Botão para atender ao requisito de Delete -->
+                    <button class="btn-delete" onclick="deletarCandidato('${candidato.id}')" style="margin-top: 15px; background: #dc3545; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer;">
+                        Deletar Candidato
+                    </button>
                 </div>
             `;
 
@@ -89,3 +93,17 @@ if (ctx && candidatos.length > 0) {
         }
     })
 }
+
+// Deleta candidato
+(window as any).deletarCandidato = (id: string) => {
+    // Janela para confirmar a exclusão
+    const confirmacao = confirm('Tem certeza que deseja deletar este candidato?');
+    
+    if (confirmacao) {
+        // Chama o método no StorageService
+        storageService.deletarCandidato(id);
+        
+        // Recarrega a página sem o candidato deletado
+        window.location.reload(); 
+    }
+};

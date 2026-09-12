@@ -29,5 +29,16 @@ export class StorageService{
         // Transforma o array em texto e guarda no local storage
         localStorage.setItem(this.CANDIDATOS_KEY, JSON.stringify(lista));
     }
+
+    // Método para deletar candidatos
+    deletarCandidato(id: string): void {
+        const lista = this.getCandidatos();
+        
+        // Método filter cria uma nova lista e retira o candidato que tiver o id 
+        const novaLista = lista.filter(candidato => candidato.id !== id);
+
+        // Salva lista atualizada
+        localStorage.setItem(this.CANDIDATOS_KEY, JSON.stringify(novaLista));
+    }
 }
 
