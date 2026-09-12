@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard de Candidatos</title>
+  <link rel="stylesheet" href="/src/style.css">
+  <style>
+    .dashboard-container { 
+        max-width: 900px; 
+        margin: 40px auto; 
+        padding: 20px; 
+    }
+    
+    /* Estilos lista de candidatos */
+    .candidatos-grid { 
+        display: flex; 
+        flex-wrap: wrap; 
+        gap: 20px; 
+        margin-bottom: 40px; 
+    }
+    .card { 
+        background: white; 
+        padding: 20px; 
+        border-radius: 8px; 
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1); 
+        flex: 1 1 250px; 
+    }
+    .card h3 { 
+        margin-top: 0; 
+        color: #007bff; 
+    }
+    .card p { 
+        margin: 5px 0; 
+        font-size: 14px; 
+    }
+    .tags { 
+        display: flex; 
+        flex-wrap: wrap; 
+        gap: 5px; 
+        margin-top: 10px; 
+    }
+    .tag { 
+        background: #e9ecef; 
+        padding: 3px 8px; 
+        border-radius: 12px; 
+        font-size: 12px; 
+        font-weight: bold; 
+        color: #333; 
+    }
+
+    /* Container do Gráfico */
+    .grafico-container { 
+        background: white; 
+        padding: 20px; 
+        border-radius: 8px; 
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1); 
+    }
+  </style>
+</head>
+<body>
+
+  <div class="dashboard-container">
+    <h2>Visão Geral: Candidatos</h2>
+    <a href="/index.html" style="display: inline-block; margin-bottom: 20px;">← Voltar para Home</a>
+
+    <!-- Injeção dOS CARDS -->
+    <div class="candidatos-grid" id="lista-candidatos">
+      <!-- TS preenche dinamicamente. -->
+    </div>
+
+    <!-- AQUI CHART.JS VAI DESENHAR O GRÁFICO -->
+    <div class="grafico-container">
+      <h3>Competências mais populares</h3>
+      <!-- A tag canvas usa o ID para o Chart.js encontrá-la -->
+      <canvas id="graficoCompetencias"></canvas>
+    </div>
+  </div>
+
+  <script type="module" src="/src/pages/dashboard.ts"></script>
+</body>
+</html>
