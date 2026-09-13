@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Cadastro de Empresa</title>
+  <link rel="stylesheet" href="/src/style.css">
+  <style>
+    .form-container { 
+        max-width: 500px; 
+        margin: 40px auto; 
+        background: white; 
+        padding: 30px; 
+        border-radius: 8px; 
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1); 
+    }
+    .form-group { 
+        margin-bottom: 15px; 
+    }
+    label { 
+        display: block; 
+        font-weight: bold; 
+        margin-bottom: 5px; 
+    }
+    input, textarea { 
+        width: 100%; 
+        padding: 10px; 
+        border: 1px solid #ccc; 
+        border-radius: 4px; 
+        box-sizing: border-box; 
+    }
+    
+    /* Botão verde para destacar que é área da empresa */
+    .btn-submit { 
+        width: 100%; 
+        padding: 12px; 
+        background: #28a745; 
+        color: white; 
+        border: none; 
+        border-radius: 4px; 
+        cursor: pointer; 
+        font-size: 16px; 
+        font-weight: bold; 
+    }
+    .btn-submit:hover { 
+        background: #1e7e34; 
+    }
+  </style>
+</head>
+<body>
+  
+  <div class="form-container">
+    <h2>Nova Empresa</h2>
+    
+    <form id="formEmpresa">
+      <div class="form-group">
+        <label for="nome">Nome da Empresa</label>
+        <input type="text" id="nome" required>
+      </div>
+
+      <div class="form-group">
+        <label for="email">E-mail Corporativo</label>
+        <input type="email" id="email" required>
+      </div>
+
+      <div class="form-group">
+        <label for="cnpj">CNPJ</label>
+        <input type="text" id="cnpj" required>
+      </div>
+
+      <div class="form-group">
+        <label for="pais">País</label>
+        <input type="text" id="pais" required>
+      </div>
+
+      <div class="form-group">
+        <label for="estado">Estado (UF)</label>
+        <input type="text" id="estado" maxlength="2" required>
+      </div>
+
+      <div class="form-group">
+        <label for="cep">CEP</label>
+        <input type="text" id="cep" required>
+      </div>
+
+      <div class="form-group">
+        <label for="descricao">Descrição da Empresa</label>
+        <textarea id="descricao" rows="3" required></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="competencias">Tecnologias utilizadas (separadas por vírgula)</label>
+        <input type="text" id="competencias" placeholder="Ex: Java, Python, Vue.js" required>
+      </div>
+
+      <button type="submit" class="btn-submit">Salvar Empresa</button>
+    </form>
+    
+    <a href="/index.html" style="display: block; text-align: center; margin-top: 15px;">Voltar para Home</a>
+  </div>
+
+  <script type="module" src="/src/pages/cadastroEmpresa.ts"></script>
+</body>
+</html>

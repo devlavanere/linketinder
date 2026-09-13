@@ -7,31 +7,37 @@ Um sistema de recrutamento que une o modelo do LinkedIn com o formato de "Match"
 
 ## Funcionalidades e Arquitetura
 
-O sistema foi projetado utilizando os pilares de Orientação a Objetos (Herança e Abstração) e estruturado com foco no Princípio da Responsabilidade Única (SRP) para separar a camada de dados da camada de interação.
+### Backend (Console Groovy)
+O sistema foi projetado utilizando os pilares de Orientação a Objetos e estruturado com foco no Princípio da Responsabilidade Única (SRP).
+*   **Arquitetura em Camadas:** Divisão entre Modelos (`Pessoa`, `Candidato`, `Empresa`), Regras de Negócio (`GerenciadorDePerfis`) e Apresentação (`Menu`).
+*   **Testes Unitários (TDD):** Desenvolvimento guiado por testes com Spock Framework, garantindo a integridade de inserção de novos elementos.
+*   **Banco de Dados em Memória:** Uso de Collections para armazenamento isolado e seguro pelo gerenciador.
+*   **Mock de Dados:** Inicialização com 5 candidatos e 5 empresas pré-cadastradas para validação imediata do MVP.
 
-*   **Arquitetura em Camadas:** O sistema é dividido entre Modelos (`Pessoa`, `Candidato`, `Empresa`), Regras de Negócio/Gerenciamento de Dados (`GerenciadorDePerfis`) e Apresentação (`Menu`).
-*   **Testes Unitários (TDD):** Desenvolvimento guiado por testes utilizando o Spock Framework, garantindo a integridade e validação da inserção de novos elementos (Candidatos e Empresas) no sistema.
-*   **Banco de Dados em Memória:** Uso de Collections (Listas) para armazenamento rápido dos perfis durante a execução, manipuladas de forma isolada e segura pelo gerenciador.
-*   **Wizard Interativo:** Fluxo de cadastro guiado passo a passo diretamente no terminal, com tratamento robusto de exceções para prevenir falhas de entrada de dados.
-*   **Mock de Dados:** Inicialização do sistema com 5 candidatos e 5 empresas pré-cadastradas para validação imediata do MVP.
+### Frontend (Web)
+O MVP visual é composto por 4 telas principais com garantia de anonimato até o "match":
+*   **Cadastro de Candidato & Empresa:** Formulários independentes e interativos para inclusão de perfis.
+*   **Perfil da Empresa (Dashboard):** Visão corporativa que lista candidatos de forma anônima e exibe um gráfico de barras dinâmico com as competências mais procuradas.
+*   **Perfil do Candidato (Mural):** Visão do desenvolvedor que lista as vagas disponíveis ocultando o nome da empresa empregadora ("Empresa Confidencial").
+*   **Isolamento Inicial:** Persistência de dados gerenciada via LocalStorage (desacoplado do backend nesta etapa).
 
 ## Tecnologias Utilizadas
 
-*   **Groovy:** 4.0.22
-*   **Java (JDK):** 8 (Zulu / Azul Systems)
-*   **Testes:** Spock Framework (2.3) e JUnit Platform
-*   **Build Tool:** Gradle
+**Backend:**
+*   Groovy (4.0.22) & Java JDK 8 (Zulu)
+*   Spock Framework (2.3)
+*   Gradle
+
+**Frontend:**
+*   TypeScript
+*   HTML5 & CSS3
+*   Vite
+*   Chart.js
 
 ## Como Executar a Aplicação
 
-**Opção 1: Via IDE (IntelliJ IDEA)**
-1. Clone este repositório.
-2. Aguarde a sincronização do Gradle (download das dependências).
-3. Navegue até o arquivo `src/main/groovy/linketinder/app/LinketinderApp.groovy`.
-4. Clique no botão de **Run** (Play verde) ao lado da classe principal.
-5. Interaja com o Wizard de navegação pelo Console integrado da IDE.
-
-**Opção 2: Via Terminal**
-Na raiz do diretório do projeto, execute o comando abaixo utilizando o Gradle Wrapper:
+### Rodando o Backend (Console)
+Acesse a pasta do backend e execute via Gradle Wrapper:
 ```bash
+cd backend
 ./gradlew run
