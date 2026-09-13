@@ -63,6 +63,30 @@
     <h2>Visão Geral: Candidatos</h2>
     <a href="/index.html" style="display: inline-block; margin-bottom: 20px;">← Voltar para Home</a>
 
+    <!-- ÁREA DE PUBLICAÇÃO DE VAGAS -->
+    <div class="grafico-container" style="margin-bottom: 40px; border-left: 5px solid #28a745;">
+      <h3>Publicar Nova Vaga</h3>
+      <form id="formVaga" style="display: flex; flex-direction: column; gap: 10px;">
+        
+        <div>
+          <label for="tituloVaga" style="font-weight: bold; font-size: 14px;">Título da Vaga</label>
+          <input type="text" id="tituloVaga" placeholder="Ex: Desenvolvedor Frontend Júnior" style="width: 100%; padding: 8px;" required>
+        </div>
+        
+        <div>
+          <label for="descricaoVaga" style="font-weight: bold; font-size: 14px;">Descrição da Vaga</label>
+          <textarea id="descricaoVaga" rows="2" placeholder="O que o candidato fará?" style="width: 100%; padding: 8px;" required></textarea>
+        </div>
+        
+        <div>
+          <label for="competenciasVaga" style="font-weight: bold; font-size: 14px;">Competências Exigidas (separadas por vírgula)</label>
+          <input type="text" id="competenciasVaga" placeholder="Ex: TypeScript, Vue.js, Docker" style="width: 100%; padding: 8px;" required>
+        </div>
+        
+        <button type="submit" style="background: #28a745; color: white; border: none; padding: 10px; border-radius: 4px; font-weight: bold; cursor: pointer;">Publicar Vaga</button>
+      </form>
+    </div>
+
     <!-- Injeção dOS CARDS -->
     <div class="candidatos-grid" id="lista-candidatos">
       <!-- TS preenche dinamicamente. -->

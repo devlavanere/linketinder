@@ -1,9 +1,10 @@
-import type { ICandidato, IEmpresa } from '../models';
+import type { ICandidato, IEmpresa, IVaga } from '../models';
 
 export class StorageService{
     // Chave para salvar no navegador
     private readonly CANDIDATOS_KEY = 'linketinder_candidatos';
     private readonly EMPRESAS_KEY = 'linketinder_empresas';
+    private readonly VAGAS_KEY = 'linketinder_vaga';
 
     // Métodos Candidatos
 
@@ -64,6 +65,22 @@ export class StorageService{
         lista.push(empresa);
 
         localStorage.setItem(this.EMPRESAS_KEY, JSON.stringify(lista));
+    }
+
+    // Métodos de Vagas
+
+    getVagas(): IVaga[] {
+        const data = localStorage.getItem(this.VAGAS_KEY);
+
+        return data ? JSON.parse(data) : [];
+    }
+
+    adicionarVaga(vaga: IVaga): void {
+        const lista = this.getVagas();
+
+        lista.push(vaga);
+
+        localStorage.setItem(this.VAGAS_KEY, JSON.stringify(lista));
     }
 }
 

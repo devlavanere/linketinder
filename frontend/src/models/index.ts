@@ -17,3 +17,11 @@ export interface IEmpresa extends IPessoa {
     cnpj: string;
     pais: string;
 }
+
+export interface IVaga {
+    id: string;
+    idEmpresa: string;
+    titulo: string;
+    descricao: string;
+    competencias: string[];
+}

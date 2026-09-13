@@ -1,3 +1,4 @@
+import type { IVaga } from "../models";
 import { StorageService } from "../services/StorageService";
 import Chart from 'chart.js/auto';
 
@@ -107,3 +108,30 @@ if (ctx && candidatos.length > 0) {
         window.location.reload(); 
     }
 };
+
+// LÓGICA DE PUBLICAÇÃO DE VAGAS
+const formVaga = document.getElementById('formVaga') as HTMLFormElement;
+
+if (formVaga) {
+    formVaga.addEventListener('submit', (event) => {
+        event.preventDefault();
+        
+        const compInput = (document.getElementById('competenciasVaga') as HTMLInputElement).value;
+        const arrayComp = compInput.split(',').map(c => c.trim());
+        
+        const novaVaga: IVaga = {
+            id: Math.random().toString(36).substring(2, 9),
+            // Como não tem login, a simulação usa o ID da empresa que está logada
+            idEmpresa: 'empresa-anonima-123', 
+            titulo: (document.getElementById('tituloVaga') as HTMLInputElement).value,
+            descricao: (document.getElementById('descricaoVaga') as HTMLTextAreaElement).value,
+            competencias: arrayComp
+        };
+        
+        // Salva a vaga no banco
+        storageService.adicionarVaga(novaVaga);
+        
+        alert('Vaga publicada com sucesso!');
+        formVaga.reset(); // Limpa os campos do formulário
+    });
+}
