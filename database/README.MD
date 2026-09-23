@@ -20,7 +20,7 @@ O banco de dados foi projetado focando na integridade dos dados e na eliminaçã
 1.  **Modelo Conceitual (brModelo):** Focado nas regras de negócio. Atributos compostos e multivalorados foram atomizados. A entidade `Competencias` foi isolada para permitir que candidatos e vagas se relacionem com ela sem duplicar informações.
 
 <div align="center">
-    <img src="assets/modelo_conceitual.png" alt="Modelo Conceitual brModelo" width="85%" />
+    <img src="assets/modelo_conceitual_01.png" alt="Modelo Conceitual brModelo" width="85%" />
 </div>
 
 2.  **Modelo Lógico/Físico (dbdiagram.io):** Tradução para o modelo relacional, onde as relações **N:N** (Candidato ↔ Competência e Vaga ↔ Competência) foram resolvidas com tabelas associativas, e a relação **1:N** (Empresa ↔ Vaga) foi amarrada via Chave Estrangeira (`id_empresa`).
