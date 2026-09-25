@@ -1,10 +1,12 @@
 package linketinder.model
 
 abstract class Pessoa implements IPessoa {
+    Integer id
     String nome
     String email
-    String estado
+    String senha
+    String pais
     String cep
     String descricao
-    List<String> competencias = [] // Inicializa como lita vazia
+    List<Competencia> competencias = [] // Guarda objeto Competencia
 }
