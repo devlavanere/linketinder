@@ -5,6 +5,7 @@ import java.time.Period
 
 class Candidato extends Pessoa{
     String cpf
+    String sobrenome
     LocalDate dataNascimento
 
     // Método auxiliar para calcular a idade na hora de exibir
@@ -14,7 +15,7 @@ class Candidato extends Pessoa{
 
     void exibirPerfil() {
         println "--- PERFIL: CANDIDATO ---"
-        println "Nome: $nome | Idade: ${getIdade()}"
+        println "Nome: $nome $sobrenome | Idade: ${getIdade()}"
         println "E-mail: $email | CPF: $cpf"
         println "Local: $pais (CEP: $cep)"
         println "Descrição: $descricao"

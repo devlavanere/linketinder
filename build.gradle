@@ -18,6 +18,9 @@ dependencies {
     // Spock Framework (Específico para Groovy 4.0)
     testImplementation platform("org.spockframework:spock-bom:2.3-groovy-4.0")
     testImplementation "org.spockframework:spock-core"
+
+    // Driver JDBC do PostgreSQL
+    implementation 'org.postgresql:postgresql:42.7.12'
 }
 
 test {
