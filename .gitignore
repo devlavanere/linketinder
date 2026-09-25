@@ -43,3 +43,6 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+
+### Ignorar a classe de configuracao local ###
+src/main/groovy/linketinder/dao/DbConfig.groovy
