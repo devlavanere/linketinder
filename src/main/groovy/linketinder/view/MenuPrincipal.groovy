@@ -49,8 +49,10 @@ class MenuPrincipal {
         println "7. Deletar Candidato (via CPF)"
         println "8. Deletar Empresa (via CNPJ)"
         println "9. Deletar Vaga (via ID)"
-        println "--------------------------------------"
-        println "10. Sair"
+        println "--- MATCHING ---"
+        println "10. Candidato: Curtir uma Vaga"
+        println "11. Empresa: Curtir um Candidato"
+        println "12. Sair"
         print "Escolha uma opção: "
     }
 
@@ -84,10 +86,16 @@ class MenuPrincipal {
                 vagaView.deletar();
                 break
             case 10:
-                println "\nEncerrando o sistema de conexão JDBC...";
+                candidatoView.curtirVaga();
+                break
+            case 11:
+                empresaView.curtirCandidato();
+                break
+            case 12:
+                println "\nEncerrando o sistema...";
                 break
             default:
-                println "\nOpção inválida! Escolha de 1 a 10."
+                println "\nOpção inválida! Escolha de 1 a 12."
         }
     }
 }

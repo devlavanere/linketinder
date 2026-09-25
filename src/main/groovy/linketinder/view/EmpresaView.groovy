@@ -43,6 +43,20 @@ class EmpresaView {
         }
     }
 
+    void curtirCandidato() {
+        println "\n--- AVALIAR CANDIDATO (LIKE) ---"
+        int idEmpresa = lerIntSeguro("Confirme o ID da sua Empresa: ")
+        int idCandidato = lerIntSeguro("Digite o ID do Candidato que deseja curtir: ")
+
+        boolean match = gerenciador.empresaCurteCandidato(idEmpresa, idCandidato)
+        println "Perfil curtido anonimamente com sucesso!"
+
+        if (match) {
+            println "\nIT'S A MATCH!"
+            println "Este candidato já havia curtido uma vaga sua! Entrem em contato."
+        }
+    }
+
     // ==========================================
     // MÉTODOS AUXILIARES DE VALIDAÇÃO
     // ==========================================
@@ -56,5 +70,17 @@ class EmpresaView {
             }
         }
         return entrada
+    }
+
+    private int lerIntSeguro(String prompt) {
+        while (true) {
+            print prompt
+            String entrada = scanner.nextLine()
+            try {
+                return Integer.parseInt(entrada.trim())
+            } catch (NumberFormatException e) {
+                println "Erro: Por favor, digite apenas números inteiros!"
+            }
+        }
     }
 }

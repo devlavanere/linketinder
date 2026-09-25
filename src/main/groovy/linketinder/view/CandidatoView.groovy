@@ -47,6 +47,20 @@ class CandidatoView {
         }
     }
 
+    void curtirVaga() {
+        println "\n--- APLICAR PARA VAGA (LIKE) ---"
+        int idCandidato = lerIntSeguro("Confirme o seu ID de Candidato: ")
+        int idVaga = lerIntSeguro("Digite o ID da Vaga que deseja curtir: ")
+
+        boolean match = gerenciador.candidatoCurteVaga(idCandidato, idVaga)
+        println "Vaga curtida com sucesso!"
+
+        if (match) {
+            println "\nIT'S A MATCH!"
+            println "A empresa dona desta vaga já havia demonstrado interesse no seu perfil!"
+        }
+    }
+
     // ==========================================
     // MÉTODOS AUXILIARES DE VALIDAÇÃO
     // ==========================================
@@ -71,6 +85,18 @@ class CandidatoView {
                 return LocalDate.parse(entrada.trim(), formatter)
             } catch (DateTimeParseException e) {
                 println "Formato inválido ou data inexistente! Use o padrão DD/MM/AAAA (ex: 20/10/1990)."
+            }
+        }
+    }
+
+    private int lerIntSeguro(String prompt) {
+        while (true) {
+            print prompt
+            String entrada = scanner.nextLine()
+            try {
+                return Integer.parseInt(entrada.trim())
+            } catch (NumberFormatException e) {
+                println "Erro: Por favor, digite apenas números inteiros!"
             }
         }
     }
