@@ -61,6 +61,16 @@
 
   <div class="dashboard-container">
     <h2>Visão Geral: Candidatos</h2>
+    <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+      <button onclick="fazerLogout()" style="padding: 8px 15px; cursor: pointer;">Sair (Logout)</button>
+      <button onclick="deletarMinhaConta()" style="padding: 8px 15px; background: #dc3545; color: white; border: none; cursor: pointer; border-radius: 4px;">Excluir Minha Conta</button>
+    </div>
+
+    <!-- Div para listar as vagas que esta empresa publicou para ela poder excluir -->
+    <div style="margin-bottom: 40px;">
+        <h3>Vagas que eu publiquei</h3>
+        <div id="lista-vagas-proprias"></div>
+    </div>
     <a href="/index.html" style="display: inline-block; margin-bottom: 20px;">← Voltar para Home</a>
 
     <!-- ÁREA DE PUBLICAÇÃO DE VAGAS -->

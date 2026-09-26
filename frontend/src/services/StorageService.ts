@@ -5,6 +5,7 @@ export class StorageService{
     private readonly CANDIDATOS_KEY = 'linketinder_candidatos';
     private readonly EMPRESAS_KEY = 'linketinder_empresas';
     private readonly VAGAS_KEY = 'linketinder_vaga';
+    private readonly SESSION_KEY = 'linketinder_session';
 
     // Métodos Candidatos
 
@@ -81,6 +82,32 @@ export class StorageService{
         lista.push(vaga);
 
         localStorage.setItem(this.VAGAS_KEY, JSON.stringify(lista));
+    }
+
+    login(id: string, tipo: 'candidato' | 'empresa'): void {
+        const session = { id, tipo };
+        localStorage.setItem(this.SESSION_KEY, JSON.stringify(session));
+    }
+
+    getCurrentUser(): { id: string, tipo: 'candidato' | 'empresa' } | null {
+        const data = localStorage.getItem(this.SESSION_KEY);
+        return data ? JSON.parse(data) : null;
+    }
+
+    logout(): void {
+        localStorage.removeItem(this.SESSION_KEY);
+    }
+
+    deletarEmpresa(id: string): void {
+        const lista = this.getEmpresas();
+        const novaLista = lista.filter(empresa => empresa.id !== id);
+        localStorage.setItem(this.EMPRESAS_KEY, JSON.stringify(novaLista));
+    }
+
+    deletarVaga(id: string): void {
+        const lista = this.getVagas();
+        const novaLista = lista.filter(vaga => vaga.id !== id);
+        localStorage.setItem(this.VAGAS_KEY, JSON.stringify(novaLista));
     }
 }
 
