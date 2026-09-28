@@ -1,5 +1,7 @@
-import type { IVaga } from "../models";
-import { StorageService } from "../services/StorageService";
+import './dashboard.css'
+
+import type { IVaga } from "../../models";
+import { StorageService } from "../../services/StorageService";
 import Chart from 'chart.js/auto';
 
 const storageService = new StorageService();
@@ -28,7 +30,7 @@ if (gridCandidatos) {
             // Requisito: Anonimato + Tooltip no atributo 'title'
             const cardHTML = `
                 <div class="card" title="Resumo Profissional:\n${candidato.descricao}\n\nLocalização:\n${candidato.estado}\n\nOBS: O nome será revelado apenas após o Match!">
-                    <h3>🕵️ Candidato Anônimo</h3>
+                    <h3>Candidato Anônimo</h3>
                     <p><strong>Idade:</strong> ${candidato.idade} anos</p>
                     <div class="tags">${tagsHTML}</div>
                 </div>

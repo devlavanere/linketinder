@@ -5,3 +5,52 @@ body {
   padding: 20px;
   color: #333;
 }
+
+.container, .dashboard-container, .vagas-container, .form-container { 
+    max-width: 900px; 
+    margin: 40px auto; 
+    background: white; 
+    padding: 30px; 
+    border-radius: 8px; 
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); 
+}
+
+.btn, .btn-submit, .btn-match { 
+    display: inline-block; 
+    padding: 10px 20px; 
+    color: white; 
+    background: #007bff; 
+    border-radius: 5px; 
+    text-decoration: none;
+    font-weight: bold; 
+    border: none;
+    cursor: pointer;
+}
+
+.btn:hover, .btn-submit:hover, .btn-match:hover { 
+    background: #0056b3; 
+}
+
+.btn-empresa { 
+    background: #28a745; 
+}
+
+.btn-empresa:hover { 
+    background: #1e7e34; 
+}
+
+.btn-delete { 
+    background: #dc3545; 
+    color: white; 
+    border: none; 
+    padding: 5px 10px; 
+    border-radius: 4px; 
+    cursor: pointer; 
+}
+
+/* Regras específicas da Home importadas para o global */
+.btn-login { 
+    background: #343a40; 
+    font-size: 18px; 
+    padding: 15px 30px; 
+}

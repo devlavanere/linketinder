@@ -1,4 +1,6 @@
-import { StorageService } from '../services/StorageService';
+import './login.css'
+
+import { StorageService } from '../../services/StorageService';
 
 const storageService = new StorageService();
 const form = document.getElementById('formLogin') as HTMLFormElement;

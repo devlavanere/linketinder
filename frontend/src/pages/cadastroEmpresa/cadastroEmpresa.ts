@@ -1,5 +1,7 @@
-import type { IEmpresa } from "../models";
-import { StorageService } from "../services/StorageService";
+import './cadastro-empresa.css'
+
+import type { IEmpresa } from "../../models";
+import { StorageService } from "../../services/StorageService";
 
 const storageService = new StorageService();
 

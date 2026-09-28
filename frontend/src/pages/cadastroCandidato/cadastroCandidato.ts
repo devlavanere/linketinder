@@ -1,5 +1,7 @@
-import type { ICandidato } from '../models';
-import { StorageService } from '../services/StorageService';
+import './cadastro-candidato.css'
+
+import type { ICandidato } from '../../models';
+import { StorageService } from '../../services/StorageService';
 
 const storageService = new StorageService();
 

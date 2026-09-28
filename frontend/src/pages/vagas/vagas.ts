@@ -1,4 +1,6 @@
-import { StorageService } from '../services/StorageService';
+import './vagas.css'
+
+import { StorageService } from '../../services/StorageService';
 
 const storageService = new StorageService();
 const currentUser = storageService.getCurrentUser();
