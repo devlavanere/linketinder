@@ -7,19 +7,18 @@ class Candidato extends Pessoa{
     String cpf
     String sobrenome
     LocalDate dataNascimento
+    List<Competencia> competencias = []
 
-    // Método auxiliar para calcular a idade na hora de exibir
     int getIdade() {
-        return dataNascimento ? Period.between(dataNascimento, LocalDate.now()).getYears() : 0
+        if (!dataNascimento) {
+            throw new IllegalStateException("Impossível calcular idade: Data de nascimento não informada.")
+        }
+        return Period.between(dataNascimento, LocalDate.now()).getYears()
     }
 
-    void exibirPerfil() {
-        println "--- PERFIL: CANDIDATO ---"
-        println "Nome: $nome $sobrenome | Idade: ${getIdade()}"
-        println "E-mail: $email | CPF: $cpf"
-        println "Local: $pais (CEP: $cep)"
-        println "Descrição: $descricao"
-        println "Competências (Skills): ${competencias.join(', ')}"
-        println "-------------------------\n"
+    @Override
+    String toString() {
+        String skills = competencias.isEmpty() ? "Nenhuma cadastrada" : competencias*.nome.join(', ')
+        return "Candidato(id: $id, nome: $nome $sobrenome, email: $email, cpf: $cpf, skills: [$skills])"
     }
 }

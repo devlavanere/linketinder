@@ -8,11 +8,9 @@ class Vaga {
     String local
     List<Competencia> competencias = []
 
-    void exibirVaga() {
-        println "--- VAGA: $nome ---"
-        println "Local: $local"
-        println "Descricao: $descricao"
-        println "Exige: ${competencias.join(', ')}"
-        println "-------------------\n"
+    @Override
+    String toString() {
+        String exigenciasFormatadas = competencias.isEmpty() ? "Nenhuma" : competencias*.nome.join(', ')
+        return "Vaga(id: $id, titulo: $nome, local: $local, exigencias: [$exigenciasFormatadas])"
     }
 }
