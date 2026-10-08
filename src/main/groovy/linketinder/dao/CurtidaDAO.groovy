@@ -106,5 +106,4 @@ class CurtidaDAO {
         }
         return isMatch
     }
-
 }
