@@ -1,6 +1,6 @@
 package linketinder.model
 
-abstract class Pessoa implements IPessoa {
+abstract class Pessoa {
     Integer id
     String nome
     String email
@@ -8,5 +8,4 @@ abstract class Pessoa implements IPessoa {
     String pais
     String cep
     String descricao
-    List<Competencia> competencias = [] // Guarda objeto Competencia
 }
