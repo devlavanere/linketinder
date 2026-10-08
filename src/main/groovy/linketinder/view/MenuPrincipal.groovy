@@ -24,7 +24,7 @@ class MenuPrincipal {
             exibirPainel()
             try {
                 opcao = scanner.nextInt()
-                scanner.nextLine() // Consome o Enter
+                scanner.nextLine()
                 processarOpcao(opcao)
             } catch (InputMismatchException e) {
                 println "\nErro: Por favor, digite apenas números inteiros."
@@ -59,40 +59,41 @@ class MenuPrincipal {
     private void processarOpcao(int opcao) {
         switch (opcao) {
             case 1:
-                empresaView.listar();
+                empresaView.listar()
                 break
             case 2:
-                candidatoView.listar();
+                candidatoView.listar()
                 break
             case 3:
-                vagaView.listar();
+                vagaView.listar()
                 break
             case 4:
-                candidatoView.cadastrar();
+                candidatoView.cadastrar()
                 break
             case 5:
-                empresaView.cadastrar();
+                empresaView.cadastrar()
                 break
             case 6:
-                vagaView.cadastrar();
+                vagaView.cadastrar()
                 break
             case 7:
-                candidatoView.deletar();
+                candidatoView.deletar()
                 break
             case 8:
-                empresaView.deletar();
+                empresaView.deletar()
                 break
             case 9:
-                vagaView.deletar();
+                vagaView.deletar()
                 break
             case 10:
-                candidatoView.curtirVaga();
+                candidatoView.curtirVaga()
                 break
             case 11:
-                empresaView.curtirCandidato();
+                empresaView.curtirCandidato()
                 break
             case 12:
-                println "\nEncerrando o sistema...";
+                "\nEncerrando o sistema... Até logo!"
+                System.exit(0)
                 break
             default:
                 println "\nOpção inválida! Escolha de 1 a 12."

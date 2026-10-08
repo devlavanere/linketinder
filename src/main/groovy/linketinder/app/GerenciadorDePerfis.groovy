@@ -1,64 +1,39 @@
 package linketinder.app
 
-import linketinder.dao.CurtidaDAO
 import linketinder.model.Candidato
 import linketinder.model.Empresa
 import linketinder.model.Vaga
-import linketinder.dao.CandidatoDAO
-import linketinder.dao.EmpresaDAO
-import linketinder.dao.VagaDAO
+import linketinder.service.CandidatoService
+import linketinder.service.EmpresaService
+import linketinder.service.VagaService
+import linketinder.service.MatchService
 
 class GerenciadorDePerfis {
-    private CandidatoDAO candidatoDAO = new CandidatoDAO()
-    private EmpresaDAO empresaDAO = new EmpresaDAO()
-    private VagaDAO vagaDAO = new VagaDAO()
-    private CurtidaDAO curtidaDAO = new CurtidaDAO()
+    private CandidatoService candidatoService = new CandidatoService()
+    private EmpresaService empresaService = new EmpresaService()
+    private VagaService vagaService = new VagaService()
+    private MatchService matchService = new MatchService()
 
     // --- CANDIDATO ---
-    void adicionarCandidato(Candidato candidato) {
-        candidatoDAO.inserir(candidato)
-    }
-
-    List<Candidato> listarCandidatos() {
-        return candidatoDAO.listarTodos()
-    }
-
-    void deletarCandidato(String cpf) {
-        candidatoDAO.deletar(cpf)
-    }
+    void adicionarCandidato(Candidato candidato) { candidatoService.cadastrar(candidato) }
+    List<Candidato> listarCandidatos() { return candidatoService.listar() }
+    void deletarCandidato(String cpf) { candidatoService.deletar(cpf) }
 
     // --- EMPRESA ---
-    void adicionarEmpresa(Empresa empresa) {
-        empresaDAO.inserir(empresa)
-    }
-
-    List<Empresa> listarEmpresas() {
-        return empresaDAO.listarTodas()
-    }
-
-    void deletarEmpresa(String cnpj) {
-        empresaDAO.deletar(cnpj)
-    }
+    void adicionarEmpresa(Empresa empresa) { empresaService.cadastrar(empresa) }
+    List<Empresa> listarEmpresas() { return empresaService.listar() }
+    void deletarEmpresa(String cnpj) { empresaService.deletar(cnpj) }
 
     // --- VAGA ---
-    void adicionarVaga(Vaga vaga) {
-        vagaDAO.inserir(vaga)
-    }
-
-    List<Vaga> listarVagas() {
-        return vagaDAO.listarTodas()
-    }
-
-    void deletarVaga(int idVaga) {
-        vagaDAO.deletar(idVaga)
-    }
+    void adicionarVaga(Vaga vaga) { vagaService.cadastrar(vaga) }
+    List<Vaga> listarVagas() { return vagaService.listar() }
+    void deletarVaga(int idVaga) { vagaService.deletar(idVaga) }
 
     // -- CURTIDA VAGAS / CANDIDATOS ---
     boolean candidatoCurteVaga(int idCandidato, int idVaga) {
-        return curtidaDAO.curtirVaga(idCandidato, idVaga)
+        return matchService.candidatoCurteVaga(idCandidato, idVaga)
     }
-
     boolean empresaCurteCandidato(int idEmpresa, int idCandidato) {
-        return curtidaDAO.curtirCandidato(idEmpresa, idCandidato)
+        return matchService.empresaCurteCandidato(idEmpresa, idCandidato)
     }
 }

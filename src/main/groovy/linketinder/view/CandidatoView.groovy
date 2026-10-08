@@ -18,7 +18,7 @@ class CandidatoView {
     void listar() {
         def candidatos = gerenciador.listarCandidatos()
         println "\n=== CANDIDATOS NO BANCO (${candidatos.size()}) ==="
-        candidatos.each { it.exibirPerfil() }
+        candidatos.each { println it }
     }
 
     void cadastrar() {
@@ -35,15 +35,29 @@ class CandidatoView {
         novo.cep = lerEntradaObrigatoria("CEP: ")
         novo.descricao = lerEntradaObrigatoria("Descrição pessoal: ")
 
-        gerenciador.adicionarCandidato(novo)
-        println "\nCandidato(a) ${novo.nome} salvo com sucesso!"
+        String skillsTexto = lerEntradaObrigatoria("Competências (separadas por vírgula. Ex: Java, Vue, SQL): ")
+        skillsTexto.split(',').each { skillStr ->
+            novo.competencias.add(new linketinder.model.Competencia(nome: skillStr.trim()))
+        }
+
+        try {
+            gerenciador.adicionarCandidato(novo)
+            println "\nCandidato(a) ${novo.nome} salvo com sucesso!"
+        } catch(RuntimeException e) {
+            println "\n Erro ao cadastrar candidato: ${e.getMessage()}"
+        }
     }
 
     void deletar() {
         println "\n--- EXCLUIR CANDIDATO ---"
         String cpf = lerEntradaObrigatoria("Digite o CPF do candidato que deseja excluir (ou 'cancelar'): ")
         if (cpf.toLowerCase() != "cancelar") {
-            gerenciador.deletarCandidato(cpf)
+            try {
+                gerenciador.deletarCandidato(cpf)
+                println "Comando de deleção enviado."
+            } catch(RuntimeException e) {
+                println "\n Erro ao deletar: ${e.getMessage()}"
+            }
         }
     }
 
@@ -52,18 +66,21 @@ class CandidatoView {
         int idCandidato = lerIntSeguro("Confirme o seu ID de Candidato: ")
         int idVaga = lerIntSeguro("Digite o ID da Vaga que deseja curtir: ")
 
-        boolean match = gerenciador.candidatoCurteVaga(idCandidato, idVaga)
-        println "Vaga curtida com sucesso!"
+        try {
+            boolean match = gerenciador.candidatoCurteVaga(idCandidato, idVaga)
+            println "Vaga curtida com sucesso!"
 
-        if (match) {
-            println "\nIT'S A MATCH!"
-            println "A empresa dona desta vaga já havia demonstrado interesse no seu perfil!"
+            if (match) {
+                println "\n IT'S A MATCH!"
+                println "A empresa dona desta vaga já havia demonstrado interesse no seu perfil!"
+            }
+        } catch(RuntimeException e) {
+            println "\n Erro ao curtir vaga: ${e.getMessage()}"
         }
     }
 
-    // ==========================================
-    // MÉTODOS AUXILIARES DE VALIDAÇÃO
-    // ==========================================
+    // MÉTODOS AUXILIARES DE VALIDAÇÃO DO CONSOLE
+
     private String lerEntradaObrigatoria(String prompt) {
         String entrada = ""
         while (entrada.trim().isEmpty()) {
@@ -84,7 +101,7 @@ class CandidatoView {
             try {
                 return LocalDate.parse(entrada.trim(), formatter)
             } catch (DateTimeParseException e) {
-                println "Formato inválido ou data inexistente! Use o padrão DD/MM/AAAA (ex: 20/10/1990)."
+                println "Formato inválido! Use o padrão DD/MM/AAAA (ex: 20/10/1990)."
             }
         }
     }

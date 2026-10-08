@@ -15,7 +15,7 @@ class VagaView {
     void listar() {
         def vagas = gerenciador.listarVagas()
         println "\n=== VAGAS NO BANCO (${vagas.size()}) ==="
-        vagas.each { it.exibirVaga() }
+        vagas.each { println it }
     }
 
     void cadastrar() {
@@ -27,21 +27,27 @@ class VagaView {
         nova.descricao = lerEntradaObrigatoria("Descrição da Vaga: ")
         nova.local = lerEntradaObrigatoria("Local (ex: Remoto, São Paulo): ")
 
-        gerenciador.adicionarVaga(nova)
-        println "\nVaga '${nova.nome}' cadastrada com sucesso!"
+        try {
+            gerenciador.adicionarVaga(nova)
+            println "\nVaga '${nova.nome}' cadastrada com sucesso!"
+        } catch(RuntimeException e) {
+            println "\n Erro ao cadastrar vaga: ${e.getMessage()}"
+        }
     }
 
     void deletar() {
         println "\n--- EXCLUIR VAGA ---"
         int idVaga = lerIntSeguro("Digite o ID Numérico da Vaga que deseja excluir (ou 0 para cancelar): ")
         if (idVaga != 0) {
-            gerenciador.deletarVaga(idVaga)
+            try {
+                gerenciador.deletarVaga(idVaga)
+                println "Comando de deleção enviado."
+            } catch(RuntimeException e) {
+                println "\n Erro ao deletar: ${e.getMessage()}"
+            }
         }
     }
 
-    // ==========================================
-    // MÉTODOS AUXILIARES DE VALIDAÇÃO
-    // ==========================================
     private String lerEntradaObrigatoria(String prompt) {
         String entrada = ""
         while (entrada.trim().isEmpty()) {

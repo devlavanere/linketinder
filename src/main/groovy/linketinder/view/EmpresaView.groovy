@@ -15,7 +15,7 @@ class EmpresaView {
     void listar() {
         def empresas = gerenciador.listarEmpresas()
         println "\n=== EMPRESAS NO BANCO (${empresas.size()}) ==="
-        empresas.each { it.exibirPerfil() }
+        empresas.each { println it }
     }
 
     void cadastrar() {
@@ -30,8 +30,12 @@ class EmpresaView {
         nova.cep = lerEntradaObrigatoria("CEP: ")
         nova.descricao = lerEntradaObrigatoria("Descrição da empresa: ")
 
-        gerenciador.adicionarEmpresa(nova)
-        println "\nEmpresa ${nova.nome} cadastrada com sucesso!"
+        try {
+            gerenciador.adicionarEmpresa(nova)
+            println "\nEmpresa ${nova.nome} cadastrada com sucesso!"
+        } catch(RuntimeException e) {
+            println "\n Erro ao cadastrar empresa: ${e.getMessage()}"
+        }
     }
 
     void deletar() {
@@ -39,7 +43,12 @@ class EmpresaView {
         println "Atenção: Excluir uma empresa apagará automaticamente todas as vagas vinculadas a ela."
         String cnpj = lerEntradaObrigatoria("Digite o CNPJ da empresa que deseja excluir (ou 'cancelar'): ")
         if (cnpj.toLowerCase() != "cancelar") {
-            gerenciador.deletarEmpresa(cnpj)
+            try {
+                gerenciador.deletarEmpresa(cnpj)
+                println "Comando de deleção enviado."
+            } catch(RuntimeException e) {
+                println "\n Erro ao deletar: ${e.getMessage()}"
+            }
         }
     }
 
@@ -48,18 +57,19 @@ class EmpresaView {
         int idEmpresa = lerIntSeguro("Confirme o ID da sua Empresa: ")
         int idCandidato = lerIntSeguro("Digite o ID do Candidato que deseja curtir: ")
 
-        boolean match = gerenciador.empresaCurteCandidato(idEmpresa, idCandidato)
-        println "Perfil curtido anonimamente com sucesso!"
+        try {
+            boolean match = gerenciador.empresaCurteCandidato(idEmpresa, idCandidato)
+            println "Perfil curtido anonimamente com sucesso!"
 
-        if (match) {
-            println "\nIT'S A MATCH!"
-            println "Este candidato já havia curtido uma vaga sua! Entrem em contato."
+            if (match) {
+                println "\n IT'S A MATCH!"
+                println "Este candidato já havia curtido uma vaga sua! Entrem em contato."
+            }
+        } catch(RuntimeException e) {
+            println "\n Erro ao curtir candidato: ${e.getMessage()}"
         }
     }
 
-    // ==========================================
-    // MÉTODOS AUXILIARES DE VALIDAÇÃO
-    // ==========================================
     private String lerEntradaObrigatoria(String prompt) {
         String entrada = ""
         while (entrada.trim().isEmpty()) {
