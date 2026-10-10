@@ -1,9 +1,13 @@
 package linketinder.service
 
-import linketinder.dao.CurtidaDAO
+import linketinder.dao.interfaces.IMatchDAO
 
 class MatchService {
-    private CurtidaDAO dao = new CurtidaDAO()
+    private IMatchDAO dao
+
+    MatchService(IMatchDAO dao) {
+        this.dao = dao
+    }
 
     boolean candidatoCurteVaga(int idCandidato, int idVaga) {
         if (idCandidato <= 0 || idVaga <= 0) {

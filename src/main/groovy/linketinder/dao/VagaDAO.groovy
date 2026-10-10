@@ -1,5 +1,6 @@
 package linketinder.dao
 
+import linketinder.dao.interfaces.ICrudDAO
 import linketinder.model.Vaga
 import linketinder.model.Competencia
 
@@ -8,7 +9,7 @@ import java.sql.PreparedStatement
 import java.sql.ResultSet
 import java.sql.SQLException
 
-class VagaDAO {
+class VagaDAO implements ICrudDAO<Vaga, Integer> {
 
     void inserir(Vaga v) {
         String sql = "INSERT INTO vagas (nome, descricao, local, id_empresa) VALUES (?, ?, ?, ?)"
@@ -27,7 +28,7 @@ class VagaDAO {
         }
     }
 
-    List<Vaga> listarTodas() {
+    List<Vaga> listar() {
         List<Vaga> lista = []
         String sql = "SELECT * FROM vagas"
         try {
@@ -77,7 +78,7 @@ class VagaDAO {
         return competencias
     }
 
-    boolean deletar(int idVaga) {
+    boolean deletar(Integer idVaga) {
         String sql = "DELETE FROM vagas WHERE id = ?"
         try {
             boolean deletado = false

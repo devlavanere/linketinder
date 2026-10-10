@@ -1,5 +1,6 @@
 package linketinder.dao
 
+import linketinder.dao.interfaces.ICrudDAO
 import linketinder.model.Empresa
 
 import java.sql.Connection
@@ -7,7 +8,7 @@ import java.sql.PreparedStatement
 import java.sql.ResultSet
 import java.sql.SQLException
 
-class EmpresaDAO {
+class EmpresaDAO implements ICrudDAO<Empresa, String> {
 
     void inserir(Empresa e) {
         String sql = "INSERT INTO empresas (nome, cnpj, email, senha, pais, cep, descricao) VALUES (?, ?, ?, ?, ?, ?, ?)"
@@ -29,7 +30,7 @@ class EmpresaDAO {
         }
     }
 
-    List<Empresa> listarTodas() {
+    List<Empresa> listar() {
         List<Empresa> lista = []
         String sql = "SELECT * FROM empresas"
         try {

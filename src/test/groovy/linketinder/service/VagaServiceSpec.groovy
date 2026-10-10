@@ -1,16 +1,17 @@
 package linketinder.service
 
-import linketinder.dao.VagaDAO
+import linketinder.dao.interfaces.ICrudDAO
 import linketinder.model.Vaga
 import spock.lang.Specification
 
 class VagaServiceSpec extends Specification {
 
     def "Deve bloquear cadastro se o titulo da vaga for muito curto"() {
-        given: "Um Service e um DAO Mockado"
-        def service = new VagaService()
-        def daoMock = Mock(VagaDAO)
-        service.dao = daoMock
+        given: "Uma interface Mockada de CRUD"
+        def daoMock = Mock(ICrudDAO)
+
+        and: "Um serviço recebendo a injeção do construtor"
+        def service = new VagaService(daoMock)
 
         and: "Uma vaga com título menor que 5 caracteres"
         def vaga = new Vaga(
@@ -31,10 +32,11 @@ class VagaServiceSpec extends Specification {
     }
 
     def "Deve salvar vaga com sucesso quando todos os dados forem validos"() {
-        given: "Um Service e um DAO Mockado"
-        def service = new VagaService()
-        def daoMock = Mock(VagaDAO)
-        service.dao = daoMock
+        given: "Uma interface Mockada de CRUD"
+        def daoMock = Mock(ICrudDAO)
+
+        and: "Um serviço recebendo a injeção do construtor"
+        def service = new VagaService(daoMock)
 
         and: "Uma vaga com dados perfeitos"
         def vaga = new Vaga(

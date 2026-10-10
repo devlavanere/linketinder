@@ -1,10 +1,14 @@
 package linketinder.service
 
-import linketinder.dao.CandidatoDAO
+import linketinder.dao.interfaces.ICrudDAO
 import linketinder.model.Candidato
 
 class CandidatoService {
-    private CandidatoDAO dao = new CandidatoDAO()
+    private ICrudDAO<Candidato, String> dao
+
+    CandidatoService(ICrudDAO<Candidato, String> dao) {
+        this.dao = dao
+    }
 
     void cadastrar(Candidato c) {
         // Regras de Negócio
@@ -22,7 +26,7 @@ class CandidatoService {
     }
 
     List<Candidato> listar() {
-        return dao.listarTodos()
+        return dao.listar()
     }
 
     void deletar(String cpf) {

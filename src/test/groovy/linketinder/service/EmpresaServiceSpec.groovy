@@ -1,16 +1,17 @@
 package linketinder.service
 
-import linketinder.dao.EmpresaDAO
+import linketinder.dao.interfaces.ICrudDAO
 import linketinder.model.Empresa
 import spock.lang.Specification
 
 class EmpresaServiceSpec extends Specification {
 
     def "Deve bloquear cadastro se o email corporativo for invalido"() {
-        given: "Um Service e um DAO Mockado"
-        def service = new EmpresaService()
-        def daoMock = Mock(EmpresaDAO)
-        service.dao = daoMock
+        given: "Uma interface Mockada de CRUD"
+        def daoMock = Mock(ICrudDAO)
+
+        and: "Um serviço recebendo a injeção do construtor"
+        def service = new EmpresaService(daoMock)
 
         and: "Uma empresa com e-mail sem arroba"
         def empresa = new Empresa(
@@ -26,15 +27,16 @@ class EmpresaServiceSpec extends Specification {
         def erro = thrown(RuntimeException)
         erro.message == "E-mail corporativo inválido."
 
-        and: "O DAO nunca é chamado"
+        and: "O banco de dados NUNCA deve ser chamado (inserir() executado 0 vezes)"
         0 * daoMock.inserir(_)
     }
 
     def "Deve bloquear cadastro com CNPJ incorreto"() {
-        given: "Um Service e um DAO Mockado"
-        def service = new EmpresaService()
-        def daoMock = Mock(EmpresaDAO)
-        service.dao = daoMock
+        given: "Uma interface Mockada de CRUD"
+        def daoMock = Mock(ICrudDAO)
+
+        and: "Um serviço recebendo a injeção pelo construtor"
+        def service = new EmpresaService(daoMock)
 
         and: "Uma empresa com CNPJ faltando números"
         def empresa = new Empresa(

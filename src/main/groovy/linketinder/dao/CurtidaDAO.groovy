@@ -1,11 +1,13 @@
 package linketinder.dao
 
+import linketinder.dao.interfaces.IMatchDAO
+
 import java.sql.Connection
 import java.sql.PreparedStatement
 import java.sql.ResultSet
 import java.sql.SQLException
 
-class CurtidaDAO {
+class CurtidaDAO implements IMatchDAO {
 
     boolean curtirVaga(int idCandidato, int idVaga) {
         try {

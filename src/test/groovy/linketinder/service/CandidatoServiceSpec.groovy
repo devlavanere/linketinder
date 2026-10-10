@@ -1,6 +1,7 @@
 package linketinder.service
 
 import linketinder.dao.CandidatoDAO
+import linketinder.dao.interfaces.ICrudDAO
 import linketinder.model.Candidato
 import spock.lang.Specification
 import java.time.LocalDate
@@ -8,12 +9,11 @@ import java.time.LocalDate
 class CandidatoServiceSpec extends Specification {
 
     def "Deve bloquear cadastro se o candidato for menor de 18 anos"() {
-        given: "Um Service e um DAO Falso (Mock)"
-        def service = new CandidatoService()
-        def daoMock = Mock(CandidatoDAO)
+        given: "Uma interface Mockada de CRUD"
+        def daoMock = Mock(ICrudDAO)
 
-        // A mágica do Groovy: Injeta o Mock na variável privada sem precisar alterar o projeto!
-        service.dao = daoMock
+        and: "Um Service recebendo a injeção pelo construtor"
+        def service = new CandidatoService(daoMock)
 
         and: "Um candidato com 15 anos"
         def candidato = new Candidato(
@@ -34,10 +34,11 @@ class CandidatoServiceSpec extends Specification {
     }
 
     def "Deve bloquear cadastro com CPF incorreto"() {
-        given: "Um Service e um DAO Falso"
-        def service = new CandidatoService()
-        def daoMock = Mock(CandidatoDAO)
-        service.dao = daoMock
+        given: "Uma interface Mockada de CRUD"
+        def daoMock = Mock(ICrudDAO)
+
+        and: "Um service recebendo a injeção pelo construtor"
+        def service = new CandidatoService(daoMock)
 
         and: "Um candidato com CPF faltando números"
         def candidato = new Candidato(

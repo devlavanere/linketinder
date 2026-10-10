@@ -1,15 +1,17 @@
 package linketinder.service
 
 import linketinder.dao.CurtidaDAO
+import linketinder.dao.interfaces.IMatchDAO
 import spock.lang.Specification
 
 class MatchServiceSpec extends Specification {
 
     def "Deve bloquear curtida de candidato se os IDs forem invalidos (zero ou negativo)"() {
-        given: "Um Service e um DAO Mockado"
-        def service = new MatchService()
-        def daoMock = Mock(CurtidaDAO)
-        service.dao = daoMock
+        given: "Uma interface Mockada"
+        def daoMock = Mock(IMatchDAO)
+
+        and: "Um serviço recebendo injeção do construtor"
+        def service = new MatchService(daoMock)
 
         when: "Tentar curtir com ID zero e ID negativo"
         service.candidatoCurteVaga(0, -5)
@@ -23,10 +25,11 @@ class MatchServiceSpec extends Specification {
     }
 
     def "Deve repassar a curtida da empresa para o DAO quando IDs forem validos e retornar o Match"() {
-        given: "Um Service e um DAO Mockado"
-        def service = new MatchService()
-        def daoMock = Mock(CurtidaDAO)
-        service.dao = daoMock
+        given: "Uma interface Mockada"
+        def daoMock = Mock(IMatchDAO)
+
+        and: "Um serviço recebendo injeção do construtor"
+        def service = new MatchService(daoMock)
 
         when: "A empresa ID 10 curtir o candidato ID 5"
         boolean teveMatch = service.empresaCurteCandidato(10, 5)

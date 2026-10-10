@@ -1,10 +1,14 @@
 package linketinder.service
 
-import linketinder.dao.VagaDAO
+import linketinder.dao.interfaces.ICrudDAO
 import linketinder.model.Vaga
 
 class VagaService {
-    private VagaDAO dao = new VagaDAO()
+    private ICrudDAO<Vaga, Integer> dao
+
+    VagaService(ICrudDAO<Vaga, Integer> dao) {
+        this.dao = dao
+    }
 
     void cadastrar(Vaga v) {
         if (v.nome.length() < 5) {

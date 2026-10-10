@@ -1,10 +1,14 @@
 package linketinder.service
 
-import linketinder.dao.EmpresaDAO
+import linketinder.dao.interfaces.ICrudDAO
 import linketinder.model.Empresa
 
 class EmpresaService {
-    private EmpresaDAO dao = new EmpresaDAO()
+    private ICrudDAO<Empresa, String> dao
+
+    EmpresaService(ICrudDAO<Empresa, String> dao) {
+        this.dao = dao
+    }
 
     void cadastrar(Empresa e) {
         if (!e.email.contains("@")) {
