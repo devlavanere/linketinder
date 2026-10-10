@@ -1,31 +1,15 @@
 import './login.css'
 
-import { StorageService } from '../../services/StorageService';
+import { AuthLocalStorageService } from '../../services/AuthLocalStorageService';
+import { CandidatoLocalStorageService } from '../../services/CandidatoLocalStorageService';
+import { EmpresaLocalStorageService } from '../../services/EmpresaLocalStorageService';
+import { LoginController } from '../../controllers/LoginController';
 
-const storageService = new StorageService();
-const form = document.getElementById('formLogin') as HTMLFormElement;
+const authService = new AuthLocalStorageService();
+const candidatoService = new CandidatoLocalStorageService();
+const empresaService = new EmpresaLocalStorageService();
 
-if (form) {
-    form.addEventListener('submit', (event) => {
-        event.preventDefault();
-        const email = (document.getElementById('emailLogin') as HTMLInputElement).value;
+// 2. Injeta no Controller
+const controller = new LoginController(authService, candidatoService, empresaService);
 
-        // Tenta logar como candidato
-        const candidato = storageService.getCandidatos().find(c => c.email === email);
-        if (candidato) {
-            storageService.login(candidato.id, 'candidato');
-            window.location.href = '/vagas.html';
-            return;
-        }
-
-        // Tenta logar como empresa
-        const empresa = storageService.getEmpresas().find(e => e.email === email);
-        if (empresa) {
-            storageService.login(empresa.id, 'empresa');
-            window.location.href = '/dashboard.html';
-            return;
-        }
-
-        alert('E-mail não encontrado. Verifique ou cadastre-se primeiro!');
-    });
-}
+controller.iniciar();
