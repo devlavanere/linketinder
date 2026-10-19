@@ -13,7 +13,7 @@ class EmpresaDAO implements ICrudDAO<Empresa, String> {
     void inserir(Empresa e) {
         String sql = "INSERT INTO empresas (nome, cnpj, email, senha, pais, cep, descricao) VALUES (?, ?, ?, ?, ?, ?, ?)"
         try {
-            DatabaseConnection.getConnection().withCloseable { Connection conn ->
+            ConnectionFactory.instance.criarConexao("POSTGRES").withCloseable { Connection conn ->
                 conn.prepareStatement(sql).withCloseable { PreparedStatement stmt ->
                     stmt.setString(1, e.nome)
                     stmt.setString(2, e.cnpj)
@@ -34,7 +34,7 @@ class EmpresaDAO implements ICrudDAO<Empresa, String> {
         List<Empresa> lista = []
         String sql = "SELECT * FROM empresas"
         try {
-            DatabaseConnection.getConnection().withCloseable { Connection conn ->
+            ConnectionFactory.instance.criarConexao("POSTGRES").withCloseable { Connection conn ->
                 conn.prepareStatement(sql).withCloseable { PreparedStatement stmt ->
                     ResultSet rs = stmt.executeQuery()
                     while (rs.next()) {
@@ -64,7 +64,7 @@ class EmpresaDAO implements ICrudDAO<Empresa, String> {
         String sql = "DELETE FROM empresas WHERE cnpj = ?"
         try {
             boolean deletado = false
-            DatabaseConnection.getConnection().withCloseable { Connection conn ->
+            ConnectionFactory.instance.criarConexao("POSTGRES").withCloseable { Connection conn ->
                 conn.prepareStatement(sql).withCloseable { PreparedStatement stmt ->
                     stmt.setString(1, cnpj)
                     int linhasAfetadas = stmt.executeUpdate()

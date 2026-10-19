@@ -29,6 +29,62 @@ Nesta versão, a aplicação (tanto Backend quanto Frontend) passou por uma refa
 
 ---
 
+## Design Patterns (Padrões de Projeto)
+
+Para garantir que o software seja escalável, testável e possua baixo acoplamento na sua infraestrutura, a camada de persistência e orquestração foi desenhada utilizando os padrões do catálogo GoF (*Gang of Four*):
+
+```mermaid
+classDiagram
+    %% Padrão FACADE
+    class MenuPrincipal {
+        <<Client>>
+    }
+    class GerenciadorDePerfis {
+        <<Facade>>
+        +cadastrarCandidato()
+        +cadastrarEmpresa()
+        +realizarMatch()
+    }
+    class CandidatoService {
+        <<Subsystem>>
+    }
+
+    %% Padrão SINGLETON & FACTORY METHOD
+    class ConnectionFactory {
+        <<Singleton>>
+        -instance: ConnectionFactory
+        +criarConexao(tipoBanco: String) IDatabaseConnection
+    }
+    
+    class IDatabaseConnection {
+        <<Interface>>
+        +conectar() Connection
+    }
+    
+    class PostgresConnection {
+        <<ConcreteProduct>>
+        +conectar() Connection
+    }
+
+    class CandidatoDAO {
+        <<Client>>
+        +inserir(candidato: Candidato)
+    }
+
+    MenuPrincipal ..> GerenciadorDePerfis : interage
+    GerenciadorDePerfis --> CandidatoService : delega fluxo
+    CandidatoService --> CandidatoDAO : aciona persistência
+    CandidatoDAO ..> ConnectionFactory : solicita conexão
+    ConnectionFactory ..> IDatabaseConnection : fabrica
+    IDatabaseConnection <|.. PostgresConnection : implementa
+```
+
+* **Facade:** Aplicado no `GerenciadorDePerfis`, atua como uma fachada que isola as Views interativas da complexidade dos múltiplos subsistemas de serviço (`CandidatoService`, `EmpresaService`, etc.).
+* **Factory Method:** Implementado na `ConnectionFactory` para abstrair a criação de conexões com o banco de dados. Os DAOs desconhecem a string de conexão ou o driver do PostgreSQL; eles apenas consomem a interface `IDatabaseConnection`. Isso garante a flexibilidade para plugar novos bancos (como H2 para testes isolados) sem alterar código de persistência.
+* **Singleton:** Aplicado à fábrica de conexões (via anotação `@Singleton` do Groovy) para solucionar o desperdício de memória, garantindo que o sistema instancie apenas uma única fábrica e gerencie um ponto de acesso global e seguro aos recursos da JVM.
+
+---
+
 ## Funcionalidades e Arquitetura
 
 O sistema utiliza uma arquitetura em camadas conectada a um banco de dados relacional.
@@ -85,3 +141,4 @@ O projeto requer que o banco de dados seja inicializado antes do backend.
 Acesse a pasta do backend, configure suas credenciais JDBC, e execute via Gradle:
 ```bash
 ./gradlew run
+```

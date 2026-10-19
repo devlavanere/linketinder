@@ -22,7 +22,7 @@ class EmpresaService {
     }
 
     List<Empresa> listar() {
-        return dao.listarTodas()
+        return dao.listar()
     }
 
     void deletar(String cnpj) {

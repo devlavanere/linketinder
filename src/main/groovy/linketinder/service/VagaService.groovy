@@ -18,7 +18,7 @@ class VagaService {
     }
 
     List<Vaga> listar() {
-        return dao.listarTodas()
+        return dao.listar()
     }
 
     void deletar(int idVaga) {

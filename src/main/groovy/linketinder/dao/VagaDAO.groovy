@@ -14,7 +14,7 @@ class VagaDAO implements ICrudDAO<Vaga, Integer> {
     void inserir(Vaga v) {
         String sql = "INSERT INTO vagas (nome, descricao, local, id_empresa) VALUES (?, ?, ?, ?)"
         try {
-            DatabaseConnection.getConnection().withCloseable { Connection conn ->
+            ConnectionFactory.instance.criarConexao("POSTGRES").withCloseable { Connection conn ->
                 conn.prepareStatement(sql).withCloseable { PreparedStatement stmt ->
                     stmt.setString(1, v.nome)
                     stmt.setString(2, v.descricao)
@@ -32,7 +32,7 @@ class VagaDAO implements ICrudDAO<Vaga, Integer> {
         List<Vaga> lista = []
         String sql = "SELECT * FROM vagas"
         try {
-            DatabaseConnection.getConnection().withCloseable { Connection conn ->
+            ConnectionFactory.instance.criarConexao("POSTGRES").withCloseable { Connection conn ->
                 conn.prepareStatement(sql).withCloseable { PreparedStatement stmt ->
                     ResultSet rs = stmt.executeQuery()
                     while (rs.next()) {
@@ -82,7 +82,7 @@ class VagaDAO implements ICrudDAO<Vaga, Integer> {
         String sql = "DELETE FROM vagas WHERE id = ?"
         try {
             boolean deletado = false
-            DatabaseConnection.getConnection().withCloseable { Connection conn ->
+            ConnectionFactory.instance.criarConexao("POSTGRES").withCloseable { Connection conn ->
                 conn.prepareStatement(sql).withCloseable { PreparedStatement stmt ->
                     stmt.setInt(1, idVaga)
                     int linhasAfetadas = stmt.executeUpdate()

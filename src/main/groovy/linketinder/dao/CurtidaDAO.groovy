@@ -12,7 +12,7 @@ class CurtidaDAO implements IMatchDAO {
     boolean curtirVaga(int idCandidato, int idVaga) {
         try {
             boolean isMatch = false
-            DatabaseConnection.getConnection().withCloseable { Connection conn ->
+            ConnectionFactory.instance.criarConexao("POSTGRES").withCloseable { Connection conn ->
                 inserirCurtidaCandidato(conn, idCandidato, idVaga)
 
                 if (verificarEmpresaCurtiuCandidato(conn, idCandidato, idVaga)) {
@@ -29,7 +29,7 @@ class CurtidaDAO implements IMatchDAO {
     boolean curtirCandidato(int idEmpresa, int idCandidato) {
         try {
             boolean isMatch = false
-            DatabaseConnection.getConnection().withCloseable { Connection conn ->
+            ConnectionFactory.instance.criarConexao("POSTGRES").withCloseable { Connection conn ->
 
                 inserirCurtidaEmpresa(conn, idEmpresa, idCandidato)
 

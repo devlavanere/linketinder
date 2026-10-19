@@ -14,7 +14,7 @@ class CandidatoDAO implements ICrudDAO<Candidato, String> {
     void inserir(Candidato c) {
         String sql = "INSERT INTO candidatos (nome, sobrenome, data_nascimento, email, cpf, pais, cep, descricao, senha) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"
         try {
-            DatabaseConnection.getConnection().withCloseable { Connection conn ->
+            ConnectionFactory.instance.criarConexao("POSTGRES").withCloseable { Connection conn ->
                 // AJUSTE 1: Pede para o banco retornar o ID gerado
                 conn.prepareStatement(sql, java.sql.Statement.RETURN_GENERATED_KEYS).withCloseable { PreparedStatement stmt ->
                     stmt.setString(1, c.nome)
@@ -85,7 +85,7 @@ class CandidatoDAO implements ICrudDAO<Candidato, String> {
         List<Candidato> lista = []
         String sql = "SELECT * FROM candidatos"
         try {
-            DatabaseConnection.getConnection().withCloseable { Connection conn ->
+            ConnectionFactory.instance.criarConexao("POSTGRES").withCloseable { Connection conn ->
                 conn.prepareStatement(sql).withCloseable { PreparedStatement stmt ->
                     ResultSet rs = stmt.executeQuery()
                     while (rs.next()) {
@@ -141,7 +141,7 @@ class CandidatoDAO implements ICrudDAO<Candidato, String> {
         String sql = "DELETE FROM candidatos WHERE cpf = ?"
         try {
             boolean deletado = false
-            DatabaseConnection.getConnection().withCloseable { Connection conn ->
+            ConnectionFactory.instance.criarConexao("POSTGRES").withCloseable { Connection conn ->
                 conn.prepareStatement(sql).withCloseable { PreparedStatement stmt ->
                     stmt.setString(1, cpf)
                     int linhasAfetadas = stmt.executeUpdate()
