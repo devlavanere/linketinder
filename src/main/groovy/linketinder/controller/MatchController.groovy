@@ -1,6 +1,6 @@
 package linketinder.controller
 
-import linketinder.dao.CurtidaDao
+import linketinder.dao.CurtidaDAO
 import linketinder.service.MatchService
 
 class MatchController {
@@ -8,7 +8,7 @@ class MatchController {
 
     MatchController() {
         // Injetando o DAO concreto (CurtidaDao) no Service, respeitando o contrato IMatchDAO
-        this.matchService = new MatchService(new CurtidaDao())
+        this.matchService = new MatchService(new CurtidaDAO())
     }
 
     boolean candidatoCurteVaga(int idCandidato, int idVaga) {

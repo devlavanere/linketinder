@@ -44,7 +44,7 @@ class CandidatoView {
             gerenciador.adicionarCandidato(novo)
             println "\nCandidato(a) ${novo.nome} salvo com sucesso!"
         } catch(RuntimeException e) {
-            println "\n Erro ao cadastrar candidato: ${e.getMessage()}"
+            println "\n Erro ao cadastrar candidato: ${e.getMessage()} " + e.message
         }
     }
 
@@ -56,7 +56,7 @@ class CandidatoView {
                 gerenciador.deletarCandidato(cpf)
                 println "Comando de deleção enviado."
             } catch(RuntimeException e) {
-                println "\n Erro ao deletar: ${e.getMessage()}"
+                println "\n Erro ao deletar: ${e.getMessage()} " + e.message
             }
         }
     }
@@ -75,7 +75,7 @@ class CandidatoView {
                 println "A empresa dona desta vaga já havia demonstrado interesse no seu perfil!"
             }
         } catch(RuntimeException e) {
-            println "\n Erro ao curtir vaga: ${e.getMessage()}"
+            println "\n Erro ao curtir vaga: ${e.getMessage()} " + e.message
         }
     }
 
@@ -87,7 +87,7 @@ class CandidatoView {
             print prompt
             entrada = scanner.nextLine()
             if (entrada.trim().isEmpty()) {
-                println "Este campo é obrigatório. Por favor, não deixe em branco!"
+                println "Este campo é obrigatório. Por favor, não deixe em branco! "
             }
         }
         return entrada
@@ -101,7 +101,7 @@ class CandidatoView {
             try {
                 return LocalDate.parse(entrada.trim(), formatter)
             } catch (DateTimeParseException e) {
-                println "Formato inválido! Use o padrão DD/MM/AAAA (ex: 20/10/1990)."
+                println "Formato inválido! Use o padrão DD/MM/AAAA (ex: 20/10/1990). " + e.message
             }
         }
     }
@@ -113,7 +113,7 @@ class CandidatoView {
             try {
                 return Integer.parseInt(entrada.trim())
             } catch (NumberFormatException e) {
-                println "Erro: Por favor, digite apenas números inteiros!"
+                println "Erro: Por favor, digite apenas números inteiros! " + e.message
             }
         }
     }

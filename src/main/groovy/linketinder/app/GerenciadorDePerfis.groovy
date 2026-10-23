@@ -1,64 +1,60 @@
 package linketinder.app
 
-import linketinder.dao.CandidatoDAO
-import linketinder.dao.CurtidaDAO
-import linketinder.dao.EmpresaDAO
-import linketinder.dao.VagaDAO
+import linketinder.controller.CandidatoController
+import linketinder.controller.EmpresaController
+import linketinder.controller.MatchController
+import linketinder.controller.VagaController
 import linketinder.model.Candidato
 import linketinder.model.Empresa
 import linketinder.model.Vaga
-import linketinder.service.CandidatoService
-import linketinder.service.EmpresaService
-import linketinder.service.VagaService
-import linketinder.service.MatchService
 
 class GerenciadorDePerfis {
-    private CandidatoService candidatoService = new CandidatoService(new CandidatoDAO())
-    private EmpresaService empresaService = new EmpresaService(new EmpresaDAO())
-    private VagaService vagaService = new VagaService(new VagaDAO())
-    private MatchService matchService = new MatchService(new CurtidaDAO())
+    private CandidatoController candidatoController = new CandidatoController()
+    private EmpresaController empresaController = new EmpresaController()
+    private VagaController vagaController = new VagaController()
+    private MatchController matchController = new MatchController()
 
-    void adicionarCandidato(Candidato candidato) {
-        candidatoService.cadastrar(candidato)
+    boolean adicionarCandidato(Candidato candidato) {
+        return candidatoController.cadastrar(candidato)
     }
 
     List<Candidato> listarCandidatos() {
-        return candidatoService.listar()
+        return candidatoController.listar()
     }
 
-    void deletarCandidato(String cpf) {
-        candidatoService.deletar(cpf)
+    boolean deletarCandidato(String cpf) {
+        return candidatoController.deletar(cpf)
     }
 
-    void adicionarEmpresa(Empresa empresa) {
-        empresaService.cadastrar(empresa)
+    boolean adicionarEmpresa(Empresa empresa) {
+        return empresaController.cadastrar(empresa)
     }
 
     List<Empresa> listarEmpresas() {
-        return empresaService.listar()
+        return empresaController.listar()
     }
 
-    void deletarEmpresa(String cnpj) {
-        empresaService.deletar(cnpj)
+    boolean deletarEmpresa(String cnpj) {
+        return empresaController.deletar(cnpj)
     }
 
-    void adicionarVaga(Vaga vaga) {
-        vagaService.cadastrar(vaga)
+    boolean adicionarVaga(Vaga vaga) {
+       return vagaController.cadastrar(vaga)
     }
 
     List<Vaga> listarVagas() {
-        return vagaService.listar()
+        return vagaController.listar()
     }
 
-    void deletarVaga(int idVaga) {
-        vagaService.deletar(idVaga)
+    boolean deletarVaga(int idVaga) {
+        return vagaController.deletar(idVaga)
     }
 
     boolean candidatoCurteVaga(int idCandidato, int idVaga) {
-        return matchService.candidatoCurteVaga(idCandidato, idVaga)
+        return matchController.candidatoCurteVaga(idCandidato, idVaga)
     }
 
     boolean empresaCurteCandidato(int idEmpresa, int idCandidato) {
-        return matchService.empresaCurteCandidato(idEmpresa, idCandidato)
+        return matchController.empresaCurteCandidato(idEmpresa, idCandidato)
     }
 }
