@@ -2,12 +2,13 @@ package linketinder.controller
 
 import linketinder.model.Candidato
 import linketinder.service.CandidatoService
+import linketinder.dao.CandidatoDAO
 
 class CandidatoController {
     private CandidatoService candidatoService
 
     CandidatoController() {
-        this.candidatoService = new CandidatoService()
+        this.candidatoService = new CandidatoService(new CandidatoDAO())
     }
 
     boolean cadastrar(Candidato candidato) {
