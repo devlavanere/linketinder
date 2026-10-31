@@ -144,12 +144,6 @@ class CadastroApp {
                     nova.cep = dados.cep
                     nova.descricao = dados.descricao
 
-                    if (dados.competencias) {
-                        dados.competencias.each { skill ->
-                            nova.competencias.add(new Competencia(nome: skill.toString()))
-                        }
-                    }
-
                     boolean sucesso = empresaController.cadastrar(nova)
 
                     if (sucesso) {
