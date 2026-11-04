@@ -1,5 +1,13 @@
 plugins {
     id 'groovy'
+    id 'war' // // Informa que este é um projeto Web
+    id "org.gretty" version "3.1.1" // Sobe o Tomcat
+}
+
+gretty {
+    servletContainer = 'tomcat9'
+    contextPath = '/'
+    httpPort = 8080
 }
 
 group = 'org.example'
@@ -12,6 +20,9 @@ repositories {
 dependencies {
     implementation 'org.apache.groovy:groovy:4.0.22'
     implementation 'org.apache.groovy:groovy-json:4.0.22'
+    // Dependência API de Servlets
+    compileOnly 'javax.servlet:javax.servlet-api:4.0.1'
+
     testImplementation platform('org.junit:junit-bom:5.10.0')
     testImplementation 'org.junit.jupiter:junit-jupiter'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
@@ -24,6 +35,8 @@ dependencies {
 
     // Driver JDBC do PostgreSQL
     implementation 'org.postgresql:postgresql:42.7.12'
+
+    gretty 'org.postgresql:postgresql:42.5.4'
 }
 
 test {

@@ -1,5 +1,3 @@
-// src/validators/validators.ts
-
 export const RegexValidators = {
     // 1. Validações de Formato (Expressões Regulares)
     

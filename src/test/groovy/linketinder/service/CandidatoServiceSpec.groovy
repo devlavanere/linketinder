@@ -44,7 +44,7 @@ class CandidatoServiceSpec extends Specification {
         def candidato = new Candidato(
                 email: "michel@teste.com",
                 cpf: "123", // Inválido
-                dataNascimento: LocalDate.now().minusYears(20)
+                dataNascimento: LocalDate.now().minusYears(15)
         )
 
         when: "Tentar cadastrar"
