@@ -27,11 +27,15 @@ class CurtidaDAO implements IMatchDAO {
     }
 
     boolean curtirCandidato(int idEmpresa, int idCandidato) {
+        curtirCandidato(idEmpresa, idCandidato, null)
+    }
+
+    boolean curtirCandidato(int idEmpresa, int idCandidato, Integer idRecrutador) {
         try {
             boolean isMatch = false
             ConnectionFactory.instance.criarConexao("POSTGRES").withCloseable { Connection conn ->
 
-                inserirCurtidaEmpresa(conn, idEmpresa, idCandidato)
+                inserirCurtidaEmpresa(conn, idEmpresa, idCandidato, idRecrutador)
 
                 List<Integer> vagasComMatch = buscarVagasParaMatch(conn, idEmpresa, idCandidato)
 
@@ -59,11 +63,12 @@ class CurtidaDAO implements IMatchDAO {
         }
     }
 
-    private void inserirCurtidaEmpresa(Connection conn, int idEmpresa, int idCandidato) throws SQLException {
-        String sql = "INSERT INTO curtidas_empresas (id_empresa, id_candidato) VALUES (?, ?) ON CONFLICT DO NOTHING"
+    private void inserirCurtidaEmpresa(Connection conn, int idEmpresa, int idCandidato, Integer idRecrutador) throws SQLException {
+        String sql = "INSERT INTO curtidas_empresas (id_empresa, id_candidato, id_recrutador) VALUES (?, ?, ?) ON CONFLICT DO NOTHING"
         conn.prepareStatement(sql).withCloseable { PreparedStatement stmt ->
             stmt.setInt(1, idEmpresa)
             stmt.setInt(2, idCandidato)
+            stmt.setObject(3, idRecrutador, java.sql.Types.INTEGER)
             stmt.executeUpdate()
         }
     }

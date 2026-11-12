@@ -20,6 +20,8 @@ e este projeto adota [SemVer](https://semver.org/lang/pt-BR/) para versionamento
 - `CHANGELOG.md` — Este arquivo, seguindo o padrão Keep a Changelog.
 
 ### Modificado
+- Interface `IMatchDAO` (`linketinder.dao.interfaces.IMatchDAO`) — Adicionada assinatura `curtirCandidato(int idEmpresa, int idCandidato, Integer idRecrutador)` para suportar a rastreabilidade opcional do recrutador na curtida.
+- Classe `CurtidaDAO` (`linketinder.dao.CurtidaDAO`) — Método `inserirCurtidaEmpresa` atualizado para incluir `id_recrutador` no INSERT SQL. Novo método `curtirCandidato(int, int, Integer)` implementado com `setObject` para suporte a nulos. O método antigo `curtirCandidato(int, int)` agora delega ao novo passando `null`, garantindo compatibilidade retroativa.
 
 ### Corrigido
 
