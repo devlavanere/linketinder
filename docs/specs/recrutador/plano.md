@@ -221,7 +221,7 @@ Cada tarefa indica: o que será feito, camada afetada, arquivos envolvidos e com
 | 5 | Testes Spock do `RecrutadorService` | Backend | [x] Concluído |
 | 6 | Alterar `CurtidaDAO` para suportar `id_recrutador` | Backend | [x] Concluído |
 | 7 | Alterar `MatchService` para propagar `id_recrutador` | Backend | [x] Concluído |
-| 8 | Atualizar testes Spock do `MatchService` | Backend | ⬜ Pendente |
+| 8 | Atualizar testes Spock do `MatchService` | Backend | [x] Concluído |
 | 9 | Controller e Servlet do Recrutador | Backend | ⬜ Pendente |
 | 10 | Teste Spock de proteção do DTO (Anonimato) | Backend | ⬜ Pendente |
 | 11 | Interface TypeScript e serviço de recrutadores | Frontend | ⬜ Pendente |

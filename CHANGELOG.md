@@ -25,6 +25,7 @@ e este projeto adota [SemVer](https://semver.org/lang/pt-BR/) para versionamento
 - Interface `IRecrutadorDAO` (`linketinder.dao.interfaces.IRecrutadorDAO`) — Adicionada assinatura `buscarPorId(Integer id)` para permitir que o MatchService localize o recrutador e extraia o `idEmpresa` antes de registrar a curtida.
 - Classe `RecrutadorDAO` (`linketinder.dao.RecrutadorDAO`) — Implementado método `buscarPorId(Integer id)` com `PreparedStatement`; lança `RuntimeException` se o recrutador não for encontrado.
 - Classe `MatchService` (`linketinder.service.MatchService`) — Adicionada dependência opcional `IRecrutadorDAO` via sobrecarga de construtores: o construtor original `MatchService(IMatchDAO)` permanece intacto para compatibilidade retroativa, e o novo `MatchService(IMatchDAO, IRecrutadorDAO)` habilita o fluxo de curtida por recrutador. Novo método `recrutadorCurteCandidato(int idRecrutador, int idCandidato)` valida IDs, busca o recrutador, extrai o `idEmpresa` e delega para `matchDao.curtirCandidato(idEmpresa, idCandidato, idRecrutador)`.
+- Testes Spock do `MatchService` (`linketinder.service.MatchServiceSpec`) — Atualizados para cobrir o novo fluxo de recrutador: 5 testes BDD no total, incluindo recrutador curte candidato com `idRecrutador` repassado ao DAO (3 parâmetros), validação de IDs inválidos (zero/negativo) e verificação de RuntimeException quando `IRecrutadorDAO` não foi injetado (construtor antigo). Os testes existentes de candidato e empresa mantêm-se sem regressão.
 
 ### Corrigido
 
