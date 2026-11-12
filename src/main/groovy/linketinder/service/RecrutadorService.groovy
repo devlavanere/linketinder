@@ -75,7 +75,7 @@ class RecrutadorService {
     }
 
     private boolean validarDigitosVerificadoresCpf(String cpf) {
-        int[] digitos = cpf.collect { it as int - 48 } as int[]
+        int[] digitos = cpf.collect { Character.getNumericValue(it as char) } as int[]
 
         int soma1 = 0
         for (int i = 0; i < 9; i++) {

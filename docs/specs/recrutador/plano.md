@@ -218,7 +218,7 @@ Cada tarefa indica: o que será feito, camada afetada, arquivos envolvidos e com
 | 2 | Model `Recrutador` e DTO de projeção | Backend | [x] Concluído |
 | 3 | DAO do Recrutador com unicidade global | Backend | [x] Concluído |
 | 4 | Service do Recrutador com validações de negócio | Backend | [x] Concluído |
-| 5 | Testes Spock do `RecrutadorService` | Backend | ⬜ Pendente |
+| 5 | Testes Spock do `RecrutadorService` | Backend | [x] Concluído |
 | 6 | Alterar `CurtidaDAO` para suportar `id_recrutador` | Backend | ⬜ Pendente |
 | 7 | Alterar `MatchService` para propagar `id_recrutador` | Backend | ⬜ Pendente |
 | 8 | Atualizar testes Spock do `MatchService` | Backend | ⬜ Pendente |
