@@ -22,6 +22,9 @@ e este projeto adota [SemVer](https://semver.org/lang/pt-BR/) para versionamento
 ### Modificado
 - Interface `IMatchDAO` (`linketinder.dao.interfaces.IMatchDAO`) — Adicionada assinatura `curtirCandidato(int idEmpresa, int idCandidato, Integer idRecrutador)` para suportar a rastreabilidade opcional do recrutador na curtida.
 - Classe `CurtidaDAO` (`linketinder.dao.CurtidaDAO`) — Método `inserirCurtidaEmpresa` atualizado para incluir `id_recrutador` no INSERT SQL. Novo método `curtirCandidato(int, int, Integer)` implementado com `setObject` para suporte a nulos. O método antigo `curtirCandidato(int, int)` agora delega ao novo passando `null`, garantindo compatibilidade retroativa.
+- Interface `IRecrutadorDAO` (`linketinder.dao.interfaces.IRecrutadorDAO`) — Adicionada assinatura `buscarPorId(Integer id)` para permitir que o MatchService localize o recrutador e extraia o `idEmpresa` antes de registrar a curtida.
+- Classe `RecrutadorDAO` (`linketinder.dao.RecrutadorDAO`) — Implementado método `buscarPorId(Integer id)` com `PreparedStatement`; lança `RuntimeException` se o recrutador não for encontrado.
+- Classe `MatchService` (`linketinder.service.MatchService`) — Adicionada dependência opcional `IRecrutadorDAO` via sobrecarga de construtores: o construtor original `MatchService(IMatchDAO)` permanece intacto para compatibilidade retroativa, e o novo `MatchService(IMatchDAO, IRecrutadorDAO)` habilita o fluxo de curtida por recrutador. Novo método `recrutadorCurteCandidato(int idRecrutador, int idCandidato)` valida IDs, busca o recrutador, extrai o `idEmpresa` e delega para `matchDao.curtirCandidato(idEmpresa, idCandidato, idRecrutador)`.
 
 ### Corrigido
 

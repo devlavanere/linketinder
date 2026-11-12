@@ -153,6 +153,27 @@ class RecrutadorDAO implements IRecrutadorDAO {
         }
     }
 
+    Recrutador buscarPorId(Integer id) {
+        String sql = "SELECT * FROM recrutadores WHERE id = ?"
+        try {
+            ConnectionFactory.instance.criarConexao("POSTGRES").withCloseable { Connection conn ->
+                conn.prepareStatement(sql).withCloseable { PreparedStatement stmt ->
+                    stmt.setInt(1, id)
+                    ResultSet rs = stmt.executeQuery()
+                    if (rs.next()) {
+                        return mapearRecrutador(rs)
+                    }
+                }
+            }
+            throw new RuntimeException("Recrutador não encontrado com ID: " + id)
+        } catch (SQLException erro) {
+            if (erro.message != null && erro.message.contains("Recrutador não encontrado")) {
+                throw erro
+            }
+            throw new RuntimeException("Falha ao buscar recrutador por ID no banco de dados.", erro)
+        }
+    }
+
     private Recrutador mapearRecrutador(ResultSet rs) throws SQLException {
         Recrutador r = new Recrutador()
         r.id = rs.getInt("id")
