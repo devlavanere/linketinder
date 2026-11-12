@@ -21,21 +21,9 @@ CREATE TABLE recrutadores (
     UNIQUE (cpf)
 );
 
--- Verifica unicidade global de e-mail (candidatos, empresas, recrutadores)
-CREATE UNIQUE INDEX uix_recrutadores_email_global
-    ON recrutadores(email)
-    WHERE NOT EXISTS (
-        SELECT 1 FROM candidatos WHERE candidatos.email = recrutadores.email
-        UNION
-        SELECT 1 FROM empresas WHERE empresas.email = recrutadores.email
-    );
-
--- Verifica unicidade global de CPF (candidatos, recrutadores)
-CREATE UNIQUE INDEX uix_recrutadores_cpf_global
-    ON recrutadores(cpf)
-    WHERE NOT EXISTS (
-        SELECT 1 FROM candidatos WHERE candidatos.cpf = recrutadores.cpf
-    );
+-- NOTA: A unicidade global de e-mail e CPF (cruzando candidatos, empresas e recrutadores)
+-- é validada exclusivamente na camada de Backend (RecrutadorDAO + RecrutadorService).
+-- O PostgreSQL não suporta subconsultas em predicados de índice (CREATE INDEX ... WHERE).
 
 -- ==========================================
 -- 2. ALTERAÇÃO DA TABELA curtidas_empresas
@@ -77,6 +65,6 @@ VALUES (2, 1, 2);
 -- ==========================================
 -- VERIFICAÇÃO
 -- ==========================================
--- SELECT * FROM recrutadores;
--- \d curtidas_empresas
--- SELECT * FROM curtidas_empresas;
+SELECT * FROM recrutadores;
+-- curtidas_empresas
+SELECT * FROM curtidas_empresas;
