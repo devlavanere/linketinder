@@ -1,6 +1,6 @@
 package linketinder.dao
 
-import linketinder.dao.interfaces.ICrudDAO
+import linketinder.dao.interfaces.IRecrutadorDAO
 import linketinder.model.Recrutador
 
 import java.sql.Connection
@@ -8,7 +8,7 @@ import java.sql.PreparedStatement
 import java.sql.ResultSet
 import java.sql.SQLException
 
-class RecrutadorDAO implements ICrudDAO<Recrutador, Integer> {
+class RecrutadorDAO implements IRecrutadorDAO {
 
     void inserir(Recrutador r) {
         String sql = "INSERT INTO recrutadores (nome, email, cpf, senha, data_nascimento, area_recrutamento, descricao, id_empresa) VALUES (?, ?, ?, ?, ?, ?, ?, ?)"
