@@ -215,7 +215,7 @@ Cada tarefa indica: o que será feito, camada afetada, arquivos envolvidos e com
 | # | Tarefa | Camada | Status |
 |---|---|---|---|
 | 1 | Script SQL: tabela `recrutadores`, alteração e dados mockados | DB | [x] Concluído |
-| 2 | Model `Recrutador` e DTO de projeção | Backend | ⬜ Pendente |
+| 2 | Model `Recrutador` e DTO de projeção | Backend | [x] Concluído |
 | 3 | DAO do Recrutador com unicidade global | Backend | ⬜ Pendente |
 | 4 | Service do Recrutador com validações de negócio | Backend | ⬜ Pendente |
 | 5 | Testes Spock do `RecrutadorService` | Backend | ⬜ Pendente |
