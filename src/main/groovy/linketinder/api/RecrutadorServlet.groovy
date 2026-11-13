@@ -87,9 +87,9 @@ class RecrutadorServlet extends HttpServlet {
 
         try {
             String idEmpresaStr = request.getParameter("idEmpresa")
-            if (idEmpresaStr == null) {
+            if (idEmpresaStr == null || idEmpresaStr.isEmpty() || idEmpresaStr.equalsIgnoreCase("NaN")) {
                 response.setStatus(HttpServletResponse.SC_BAD_REQUEST)
-                response.getWriter().write(JsonOutput.toJson([erro: "Parâmetro 'idEmpresa' é obrigatório."]))
+                response.getWriter().write(JsonOutput.toJson([erro: "Parâmetro idEmpresa inválido"]))
                 return
             }
 

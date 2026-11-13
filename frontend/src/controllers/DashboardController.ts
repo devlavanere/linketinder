@@ -42,7 +42,12 @@ export class DashboardController {
         this.renderizarGrafico();
         this.configurarAcoesGlobais(currentUser.id);
         this.configurarFormularioVaga(currentUser.id);
-        this.carregarRecrutadores(parseInt(currentUser.id));
+        const idEmpresa = parseInt(currentUser.id);
+        if (Number.isNaN(idEmpresa)) {
+            console.warn("ID da empresa logada inválido; não é possível carregar recrutadores.");
+        } else {
+            this.carregarRecrutadores(idEmpresa);
+        }
     }
 
     private renderizarCandidatos() {

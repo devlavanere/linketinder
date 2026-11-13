@@ -224,6 +224,6 @@ Cada tarefa indica: o que será feito, camada afetada, arquivos envolvidos e com
 | 8 | Atualizar testes Spock do `MatchService` | Backend | [x] Concluído |
 | 9 | Controller e Servlet do Recrutador | Backend | [x] Concluído |
 | 10 | Teste Spock de proteção do DTO (Anonimato) | Backend | [x] Concluído |
-| 11 | Interface TypeScript e serviço de recrutadores | Frontend | ⬜ Pendente |
-| 12 | Página de cadastro de recrutador | Frontend | ⬜ Pendente |
-| 13 | Seção de gerenciamento de recrutadores no Dashboard | Frontend | ⬜ Pendente |
+| 11 | Interface TypeScript e serviço de recrutadores | Frontend | [x] Concluído |
+| 12 | Página de cadastro de recrutador | Frontend | [x] Concluído |
+| 13 | Seção de gerenciamento de recrutadores no Dashboard | Frontend | [x] Concluído |
