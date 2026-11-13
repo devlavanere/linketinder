@@ -20,6 +20,7 @@ e este projeto adota [SemVer](https://semver.org/lang/pt-BR/) para versionamento
 - `AGENTS.md` — Guia de referência para agentes de IA com stack, estrutura, domínio, regras de negócio, Princípio do Anonimato, banco de dados, como executar, testar e convenções do projeto.
 - `skills/feature-com-spec/SKILL.md` — Skill de Spec-Driven Development adaptado para o Linketinder, com specs organizadas em `docs/specs/<nome-da-feature>/`, checklist de validação incluindo o Princípio do Anonimato e obrigação de atualizar este CHANGELOG em cada tarefa.
 - `CHANGELOG.md` — Este arquivo, seguindo o padrão Keep a Changelog.
+- Testes Spock do `RecrutadorDTO` (`linketinder.model.RecrutadorDTOSpec`) — 3 testes BDD validando o Princípio do Anonimato: conversão `toDTO()` retorna apenas dados públicos (id, nome, areaRecrutamento, descricao, idEmpresa), verificação de que `RecrutadorDTO` não possui propriedades sensíveis (cpf, senha, dataNascimento) via reflexão, e serialização JSON via `JsonOutput` confirmando que as chaves "cpf", "senha" e "dataNascimento" não aparecem na string JSON resultante.
 
 ### Modificado
 - Interface `IMatchDAO` (`linketinder.dao.interfaces.IMatchDAO`) — Adicionada assinatura `curtirCandidato(int idEmpresa, int idCandidato, Integer idRecrutador)` para suportar a rastreabilidade opcional do recrutador na curtida.
