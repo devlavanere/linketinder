@@ -1,8 +1,7 @@
-// frontend/src/controllers/DashboardController.ts
-
 import type { ICandidato, IVaga, IEmpresa } from '../models';
 import type { ICrudService } from '../services/interfaces/ICrudService';
 import type { IAuthService } from '../services/interfaces/IAuthService';
+import { RecrutadorApiService } from '../services/RecrutadorApiService';
 import Chart from 'chart.js/auto';
 
 export class DashboardController {
@@ -11,17 +10,20 @@ export class DashboardController {
     private empresaService: ICrudService<IEmpresa>;
     private candidatoService: ICrudService<ICandidato>;
     private vagaService: ICrudService<IVaga>;
+    private recrutadorService: RecrutadorApiService;
 
     constructor(
         authService: IAuthService,
         empresaService: ICrudService<IEmpresa>,
         candidatoService: ICrudService<ICandidato>,
-        vagaService: ICrudService<IVaga>
+        vagaService: ICrudService<IVaga>,
+        recrutadorService: RecrutadorApiService
     ) {
         this.authService = authService;
         this.empresaService = empresaService;
         this.candidatoService = candidatoService;
         this.vagaService = vagaService;
+        this.recrutadorService = recrutadorService;
     }
 
     iniciar() {
@@ -40,6 +42,12 @@ export class DashboardController {
         this.renderizarGrafico();
         this.configurarAcoesGlobais(currentUser.id);
         this.configurarFormularioVaga(currentUser.id);
+        const idEmpresa = parseInt(currentUser.id);
+        if (Number.isNaN(idEmpresa)) {
+            console.warn("ID da empresa logada inválido; não é possível carregar recrutadores.");
+        } else {
+            this.carregarRecrutadores(idEmpresa);
+        }
     }
 
     private renderizarCandidatos() {
@@ -63,6 +71,34 @@ export class DashboardController {
                     gridCandidatos.innerHTML += cardHTML;
                 });
             }
+        }
+    }
+
+    private async carregarRecrutadores(idEmpresa: number) {
+        const gridRecrutadores = document.getElementById('recrutadores-grid');
+        if (!gridRecrutadores) return;
+
+        try {
+            const recrutadores = await this.recrutadorService.listarPorEmpresa(idEmpresa);
+
+            if (recrutadores.length === 0) {
+                gridRecrutadores.innerHTML = '<p>Você ainda não cadastrou recrutadores.</p>';
+            } else {
+                gridRecrutadores.innerHTML = '';
+                recrutadores.forEach(recrutador => {
+                    const cardHTML = `
+                        <div class="card">
+                            <h3>${recrutador.nome}</h3>
+                            <p><strong>Área de Recrutamento:</strong> ${recrutador.areaRecrutamento}</p>
+                            <p>${recrutador.descricao}</p>
+                        </div>
+                    `;
+                    gridRecrutadores.innerHTML += cardHTML;
+                });
+            }
+        } catch (erro) {
+            console.error('Erro ao carregar recrutadores:', erro);
+            gridRecrutadores.innerHTML = '<p>Erro ao carregar lista de recrutadores.</p>';
         }
     }
 

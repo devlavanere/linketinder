@@ -25,3 +25,22 @@ export interface IVaga {
     descricao: string;
     competencias: string[];
 }
+
+export interface IRecrutador {
+    id: number;
+    nome: string;
+    areaRecrutamento: string;
+    descricao: string;
+    idEmpresa: number;
+}
+
+export interface IRecrutadorCadastro {
+    nome: string;
+    email: string;
+    cpf: string;
+    senha: string;
+    dataNascimento: string;
+    areaRecrutamento: string;
+    descricao: string;
+    idEmpresa: number;
+}

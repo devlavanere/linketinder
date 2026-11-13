@@ -2,12 +2,13 @@ package linketinder.controller
 
 import linketinder.model.Empresa
 import linketinder.service.EmpresaService
+import linketinder.dao.EmpresaDAO
 
 class EmpresaController {
     private EmpresaService empresaService
 
     EmpresaController() {
-        this.empresaService = new EmpresaService()
+        this.empresaService = new EmpresaService(new EmpresaDAO())
     }
 
     boolean cadastrar(Empresa empresa) {

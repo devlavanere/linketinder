@@ -2,12 +2,13 @@ package linketinder.controller
 
 import linketinder.model.Vaga
 import linketinder.service.VagaService
+import linketinder.dao.VagaDAO
 
 class VagaController {
     private VagaService vagaService
 
     VagaController() {
-        this.vagaService = new VagaService()
+        this.vagaService = new VagaService(new VagaDAO())
     }
 
     boolean cadastrar(Vaga vaga) {
